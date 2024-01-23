@@ -3,7 +3,7 @@ return {
     -- 'navarasu/onedark.nvim',
 
     -- Dracula
-    'mofiqul/dracula.nvim',
+    'maxmx03/dracula.nvim',
     priority = 1000,
     config = function()
     vim.cmd.colorscheme 'dracula'

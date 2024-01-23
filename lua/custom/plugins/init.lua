@@ -2,10 +2,9 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-
-
 return {
--- disable netrw at the very start of your init.lua
-  "christoomey/vim-tmux-navigator", lazy=false,
+	{
+		"christoomey/vim-tmux-navigator", lazy=false,
+	},
 
 }
