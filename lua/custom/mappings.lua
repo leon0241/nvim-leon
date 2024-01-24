@@ -20,6 +20,7 @@ vim.keymap.set('n', 'H', '^', { desc = 'Start of Line'})
 vim.keymap.set('v', 'L', '$', { desc = 'End of Line'})
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line'})
 
+-- The classic insert mode shortcut
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Enter insert mode', nowait = true})
 
 -- NvimTree
@@ -36,17 +37,19 @@ vim.keymap.set('n', '<Leader>fb', '<cmd> Telescope buffers<CR>', { desc = 'Teles
 vim.keymap.set('n', '<Leader>ff', '<cmd> Telescope find_files<CR>', { desc = 'Telescope: Find Files'})
 vim.keymap.set('n', '<Leader>fg', '<cmd> Telescope live_grep<CR>', { desc = 'Telescope: Live grep'})
 
--- -- UltiSnips
-vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsExpandTrigger', { desc = "Expand UltiSnips"})
-vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsJumpForwardTrigger', { desc = "Expand UltiSnips"})
-vim.keymap.set('n', 'S-<Tab>', '<cmd> UltiSnipsJumpBackwardsTrigger', { desc = "Expand UltiSnips"})
+-- -- -- UltiSnips
+-- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsExpandTrigger', { desc = "Expand UltiSnips"})
+-- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsJumpForwardTrigger', { desc = "Expand UltiSnips"})
+-- vim.keymap.set('n', 'S-<Tab>', '<cmd> UltiSnipsJumpBackwardsTrigger', { desc = "Expand UltiSnips"})
 
+-- LazyGit
+vim.keymap.set('n', '<Leader>lg', '<cmd> LazyGit<CR>', { desc = 'Enter LazyGit'})
 
 -- Luasnip
--- local ls = require("luasnip")
--- vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
--- vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
--- vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
+local ls = require("luasnip")
+vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
 
 -- vim.keymap.set({"i", "s"}, "<>", function()
 -- 	if ls.choice_active() then

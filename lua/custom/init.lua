@@ -14,7 +14,7 @@ local t = ls.text_node
 
 
 require("luasnip.loaders.from_lua").load({
-  include = { "all" },
+  include = { "all", "tex" },
   paths = {"~/.config/nvim/lua/snippets"}
 })
 
