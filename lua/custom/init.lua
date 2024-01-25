@@ -12,6 +12,16 @@ local ls = require 'luasnip'
 local s = ls.snippet
 local t = ls.text_node
 
+-- LuaSnip mappings - need luasnip to be loaded first
+vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
+
+
+
+vim.g.vimtex_view_method = 'zathura'
+
+
 
 require("luasnip.loaders.from_lua").load({
   include = { "all", "tex" },
