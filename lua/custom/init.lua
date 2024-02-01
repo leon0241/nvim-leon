@@ -1,9 +1,13 @@
 vim.opt.relativenumber = true
-vim.opt.signcolumn = 'number'
+vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.conceallevel = 3
+vim.opt.foldlevelstart = 99
+
+vim.opt.autochdir = true
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -13,18 +17,16 @@ local s = ls.snippet
 local t = ls.text_node
 
 -- LuaSnip mappings - need luasnip to be loaded first
-vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "<Tab>", function() ls.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
+-- vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
+-- vim.keymap.set({"i", "s"}, "df", function() ls.jump(1) end, {silent = true})
+-- vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
 
 
 
 vim.g.vimtex_view_method = 'zathura'
 
-
-
 require("luasnip.loaders.from_lua").load({
-  include = { "all", "tex" },
+  include = { "all", "tex", "lua"},
   paths = {"~/.config/nvim/lua/snippets"}
 })
 
@@ -50,8 +52,8 @@ cmp.setup {
     completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-k>'] = cmp.mapping.select_next_item(),
+    ['<C-j>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
@@ -59,19 +61,33 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    -- AutoComplete select next item
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif ls.expand_or_locally_jumpable() then
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    -- Snippet go next selector
+    ['jl'] = cmp.mapping(function(fallback)
+      if ls.expand_or_locally_jumpable() then
         ls.expand_or_jump()
       else
         fallback()
       end
     end, { 'i', 's' }),
+    -- AutoComplete select previous item
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif ls.locally_jumpable(-1) then
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    -- Snippet go back selector
+    ['jp'] = cmp.mapping(function(fallback)
+      if ls.locally_jumpable(-1) then
         ls.jump(-1)
       else
         fallback()
@@ -84,3 +100,8 @@ cmp.setup {
     { name = 'path' },
   },
 }
+
+
+
+
+

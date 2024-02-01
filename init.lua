@@ -17,7 +17,6 @@ Kickstart.nvim is a template for your own configuration.
   a guide. One possible example:
   - https://learnxinyminutes.com/docs/lua/
 
-/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.lu/data/Documents/shit broken backup/lua/custom/init.luaaaaaaaaaaaaaaa
   And then you can explore or search through `:help lua-guide`
   - https://neovim.io/doc/user/lua-guide.html
 
@@ -192,10 +191,15 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    -- 'navarasu/onedark.nvim',
+    -- priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'onedark'
+    -- end
+    'maxmx03/dracula.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'dracula'
     end,
   },
 
@@ -206,7 +210,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'dracula',
         component_separators = '|',
         section_separators = '',
       },

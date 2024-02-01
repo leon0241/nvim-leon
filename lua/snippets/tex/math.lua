@@ -18,7 +18,7 @@ return {}, {
 	),
 	s(
 		{trig="dm", dscr="Expand Math"},
-		fmta("$$<>$$", { i(1) }),
+		fmta("\\[<>\\]", { i(1) }),
 		{condition = line_begin}
 	),
 	s(

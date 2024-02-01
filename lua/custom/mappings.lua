@@ -17,7 +17,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Start and end of line
 vim.keymap.set('n', 'L', '$', { desc = 'End of Line'})
 vim.keymap.set('n', 'H', '^', { desc = 'Start of Line'})
-vim.keymap.set('v', 'L', '$', { desc = 'End of Line'})
+vim.keymap.set('v', 'L', '$h', { desc = 'End of Line'})
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line'})
 
 -- The classic insert mode shortcut
@@ -44,6 +44,13 @@ vim.keymap.set('n', '<Leader>fg', '<cmd> Telescope live_grep<CR>', { desc = 'Tel
 
 -- LazyGit
 vim.keymap.set('n', '<Leader>lg', '<cmd> LazyGit<CR>', { desc = 'Enter LazyGit'})
+
+vim.keymap.set('n',  '<leader>p', '<cmd> lua require("nabla").popup()<CR>', {desc = 'nabla'})
+-- Customize with popup({border = ...})  : `single` (default), `double`, `rounded`
+--
+-- Neorg
+-- vim.keymap.set('v', '<Leader>ml', 'S]', { desc = 'Neorg link WIP'})
+
 
 -- Luasnip
 -- local ls = require 'luasnip' 

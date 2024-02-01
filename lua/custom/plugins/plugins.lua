@@ -9,5 +9,8 @@ return {
 
 	{
 		"lervag/vimtex", lazy=false,
+	},
+	{
+		"jbyuki/nabla.nvim", lazy=false,
 	}
 }

@@ -6,7 +6,8 @@ local helper = require('luasnip-helper-funcs')
 local fmta = require('luasnip.extras.fmt').fmta
 
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
-local inMath = helper.in_mathzone
+local in_math = helper.in_mathzone
+local inner_snip = helper.inner_snip
 
 local snippet_list = {}
 
@@ -17,7 +18,7 @@ local function mathbb_snippet(letter)
     return s(
 	"|" .. letter,
 	t("\\mathbb{" .. letter .. "}"),
-	{ condition = inMath }
+	{ condition = in_math }
     )
 end
 
@@ -26,9 +27,10 @@ local function mbb_super_sub(letter, super, sign)
     return s(
 	"\\mathbb{" .. letter .. "}" .. super,
 	t("\\mathbb{" .. letter .. "}" .. sign .. "{" .. super .. "}"),
-	{ condition = inMath }
+	{ condition = in_math }
     )
 end
+
 
 -- Inserts all regular mathBBs into a table
 for _, letter in ipairs(mathbb_letters) do
@@ -47,10 +49,14 @@ local manual_snippet_list = {
 
     mbb_super_sub("N", "0", "_"),
 
-    s(
-	{trig="rm", dscr="Roman Typestyle"},
-	fmta("\\mathrm{<>}", { i(1) })
-    ),
+    -- inner_snip("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
+    -- inner_snip("it", "\\mathit{<>}", "Math Italic", in_mathzone),
+    -- inner_snip("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
+    -- inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
+    -- inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
+
+    -- inner_snip("f;bf", "\\textbf{<>}", "Text Bold", true),
+    -- inner_snip("f;it", "\\textit{<>}", "Text Italic", true),
 }
 
 
