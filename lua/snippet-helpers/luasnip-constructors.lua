@@ -21,12 +21,13 @@ local in_mathzone = conditions.in_mathzone
 ---@param label any Label for autocomplete(optional)
 ---@param cond any Expand condition(optional)
 function M.inner_snip(name, command, label, cond)
-  local test_cond = function() return true end
+  if label == nil then label = "" end
+  if cond == nil then cond = function() return true end end
 
   return s(
-    {trig="test", dscr="test"},
-    fmta("test<>", { i(1) })
-    { condition = test_cond }
+    {trig=name, dscr=label},
+    fmta(command, { i(1) }),
+    { condition = cond}
   )
 end
 
