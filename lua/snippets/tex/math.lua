@@ -5,25 +5,34 @@ local i = ls.insert_node
 local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 
-local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
-local helper = require('luasnip-helper-funcs')
-local inMath = helper.in_mathzone
+local conditions = require('snippet-helpers.luasnip-conditions')
+local funcs = require('snippet-helpers.luasnip-constructors')
 
+local line_begin = conditions.line_begin
+local in_mathzone = conditions.in_mathzone
 
+local inner_snip = funcs.inner_snip
+
+local cond = function() return true end
 return {}, {
+	s(
+		{trig="triggertest", dscr="test"},
+		fmta("test<>", { i(1) }),
+		{condition = cond}
+	),
+	s(
+		{trig="dm", dscr="Expand Math"},
+		fmta("\\[<>\\]", { i(1) }),
+		{condition = cond}
+	),
 	s(
 		{trig="mk", dscr="Expand Inline Math"},
 		fmta("$<>$", { i(1) })
 	),
 	s(
-		{trig="dm", dscr="Expand Math"},
-		fmta("\\[<>\\]", { i(1) }),
-		{condition = line_begin}
-	),
-	s(
 		{trig = "set", dscr="Make a set"},
 		fmta("\\{<>\\}", { i(1)}),
-		{condition = inMath}
-	)
+		{condition = in_mathzone}
+	),
 }

@@ -1,10 +1,25 @@
+-- Luasnip functions
 local ls = require 'luasnip'
 local s = ls.snippet
 local t = ls.text_node
-local helper = require('luasnip-helper-funcs')
-local inMath = helper.in_mathzone
+local i = ls.insert_node
+local fmta = require('luasnip.extras.fmt').fmta
 
-local snippet_list = {}
+-- Import helper functions
+local conditions = require('snippet-helpers.luasnip-conditions')
+local funcs = require('snippet-helpers.luasnip-constructors')
+
+-- Line conditions
+local line_begin = conditions.line_begin
+local in_mathzone = conditions.in_mathzone
+local in_text = conditions.in_text
+
+-- Constructor functions
+local inner_snip = funcs.inner_snip
+local create_alpha = funcs.create_alpha
+
+local snippets = {}
+local autosnippets = {}
 
 local greek_letters = {
     a = {command = "alpha", upper = false},
@@ -33,38 +48,31 @@ local greek_letters = {
     w = {command = "omega", upper = true},
 }
 
-local function create_snippet(snip, command)
-    return s(
-	"@" .. snip,
-	t("\\" .. command),
-	{ condition = inMath}
-    )
-end
 
 -- Add greek letter snippets
 for snip, data in pairs(greek_letters) do
     -- Insert the lower case case, e.g. @a -> \alpha
-    table.insert(snippet_list, create_snippet(snip, data.command))
+    table.insert(autosnippets, create_alpha(snip, data.command))
 
     -- If uppercase looks different from latin (this has to be done manually)
     if data.upper == true then
 	-- Insert the upper case case, e.g. @A -> \Alpha
     	table.insert(
-	    snippet_list,
-	    create_snippet(string.upper(snip), data.command:gsub("^%l", string.upper))
+	    autosnippets,
+	    create_alpha(string.upper(snip), data.command:gsub("^%l", string.upper))
 	)
     end
 end
 
 -- Create snippet list
 local manual_snippet_list = {
-    s("pi", t("\\pi"), {condition = inMath})
+    s("pi", t("\\pi"), {condition = in_mathzone})
 }
 
 -- Combine automated lists with manual list
 for _, snippet in ipairs(manual_snippet_list) do
-    table.insert(snippet_list, snippet)
+    table.insert(autosnippets, snippet)
 end
 
 -- Second list is autosnippets
-return {}, snippet_list
+return {}, autosnippets

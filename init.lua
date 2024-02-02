@@ -437,8 +437,12 @@ vim.defer_fn(function()
     -- List of parsers to ignore installing
     ignore_install = {},
     -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
+    highlight = {
+      enable = true,
+      disable = { "latex" },
+      additional_vim_regex_highlighting = { "latex", "markdown" },
+    },
     modules = {},
-    highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
       enable = true,
