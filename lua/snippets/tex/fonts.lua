@@ -55,8 +55,8 @@ end
 
 -- Regular snippets
 local snippets = {
-    -- inner_snip("f;bf", "\\textbf{<>}", "Text Bold", in_text),
-    -- inner_snip("f;it", "\\textit{<>}", "Text Italic", in_text),
+    inner_snip("f;bf", "\\textbf{<>}", "Text Bold", in_text),
+    inner_snip("f;it", "\\textit{<>}", "Text Italic", in_text),
 }
 
 return snippets, autosnippets

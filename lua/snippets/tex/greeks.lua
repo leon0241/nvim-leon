@@ -1,21 +1,11 @@
--- Luasnip functions
-local ls = require 'luasnip'
-local s = ls.snippet
-local t = ls.text_node
-local i = ls.insert_node
-local fmta = require('luasnip.extras.fmt').fmta
-
 -- Import helper functions
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
 
 -- Line conditions
-local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
-local in_text = conditions.in_text
 
 -- Constructor functions
-local inner_snip = funcs.inner_snip
 local create_alpha = funcs.create_alpha
 
 local snippets = {}

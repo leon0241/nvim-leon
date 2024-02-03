@@ -25,7 +25,7 @@ function M.inner_snip(name, command, label, cond)
   if cond == nil then cond = function() return true end end
 
   return s(
-    {trig=name, dscr=label},
+    {trig=name, dscr=label, wordTrig=false},
     fmta(command, { i(1) }),
     { condition = cond}
   )
@@ -34,19 +34,20 @@ end
 -- Snippet that inserts a latex object with no blocks
 ---@param name string Shortcut to call the snippet
 ---@param command string LaTeX code to call
----@param label string Label for autocomplete(optional)
+---@param label any Label for autocomplete(optional)
 ---@param cond any Expand condition
 function M.object(name, command, label, cond)
-  label = label or ""
-  cond = label or true
+  if label == nil then label = "" end
+  if cond == nil then cond = function() return true end end
 
   return s(
-    {trig=name, dscr=label},
+    {trig=name, dscr=label, wordTrig=false},
     t(command),
     { condition = cond }
   )
 end
 
+-- object("sr", "^{2}", "square", in_mathzone),
 
 ---Snippet that inserts a LaTeX environment
 ---@param name string Shortcut to call the snippet
@@ -54,9 +55,8 @@ end
 ---@param label string Label for autocomplete(optional)
 ---@param cond any Expand condition
 function M.env_snip(name, command, label, cond)
-  label = label or ""
-  cond = label or true
-
+  if label == nil then label = "" end
+  if cond == nil then cond = function() return true end end
 
   local start_string = "\\begin{" .. command .. "}"
   local end_string = "\\end{" .. command .. "}"
@@ -65,7 +65,7 @@ function M.env_snip(name, command, label, cond)
   return s(
     {trig=name, dscr=label},
     fmta(fmta_val, { i(1)}),
-    { condition = cond}
+    { condition = line_begin and cond}
   )
 end
 
@@ -74,7 +74,7 @@ end
 -- Turns |R into \mathbb{R} for some R
 function M.mathbb_snippet(letter)
     return s(
-	"|" .. letter,
+	{trig= "|" .. letter, wordTrig=false},
 	t("\\mathbb{" .. letter .. "}"),
 	{ condition = in_mathzone }
     )
@@ -83,7 +83,7 @@ end
 -- Adds a superscripted or subscripted symbol to a mathBB 
 function M.mbb_super_sub(letter, super, sign)
     return s(
-	"\\mathbb{" .. letter .. "}" .. super,
+	{trig="\\mathbb{" .. letter .. "}" .. super, wordTrig=false},
 	t("\\mathbb{" .. letter .. "}" .. sign .. "{" .. super .. "}"),
 	{ condition = in_mathzone }
     )
@@ -94,12 +94,31 @@ end
 -- Greek alphas
 function M.create_alpha(snip, command)
     return s(
-	"@" .. snip,
+	{trig="@" .. snip, wordTrig=false},
 	t("\\" .. command),
 	{ condition = in_mathzone}
     )
 end
 
+
+
+-- Theorem box
+function M.thmbox(name, command, label)
+    local start_string = "\\begin{" .. command .. "}[<>]{<>}{<>}"
+    local end_string = "\\end{" .. command .. "}"
+    local fmta_val = start_string .. "\n\t<>\n" .. end_string
+
+    return s(
+	{trig=name, dscr=label},
+	fmta(fmta_val, {
+	    i(1, "Name"),
+	    i(2, "Label"),
+	    i(3, "Number"),
+	    i(4),
+	}),
+	{ condition = line_begin}
+    )
+end
 
 
 return M
