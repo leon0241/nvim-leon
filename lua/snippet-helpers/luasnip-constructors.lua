@@ -20,15 +20,16 @@ local in_mathzone = conditions.in_mathzone
 ---@param command string LaTeX code to call
 ---@param label any Label for autocomplete(optional)
 ---@param cond any Expand condition(optional)
-function M.inner_snip(name, command, label, cond)
-  if label == nil then label = "" end
-  if cond == nil then cond = function() return true end end
+function M.inner_snip(name, command, label, cond, prio)
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
 
-  return s(
-    {trig=name, dscr=label, wordTrig=false},
-    fmta(command, { i(1) }),
-    { condition = cond}
-  )
+    return s(
+	{trig=name, dscr=label, wordTrig=false, priority=prio},
+	fmta(command, { i(1) }),
+	{ condition = cond}
+    )
 end
 
 -- Snippet that inserts a latex object with no blocks
@@ -37,14 +38,14 @@ end
 ---@param label any Label for autocomplete(optional)
 ---@param cond any Expand condition
 function M.object(name, command, label, cond)
-  if label == nil then label = "" end
-  if cond == nil then cond = function() return true end end
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
 
-  return s(
-    {trig=name, dscr=label, wordTrig=false},
-    t(command),
-    { condition = cond }
-  )
+    return s(
+	{trig=name, dscr=label, wordTrig=false},
+	t(command),
+	{ condition = cond }
+    )
 end
 
 -- object("sr", "^{2}", "square", in_mathzone),
@@ -55,18 +56,18 @@ end
 ---@param label string Label for autocomplete(optional)
 ---@param cond any Expand condition
 function M.env_snip(name, command, label, cond)
-  if label == nil then label = "" end
-  if cond == nil then cond = function() return true end end
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
 
-  local start_string = "\\begin{" .. command .. "}"
-  local end_string = "\\end{" .. command .. "}"
-  local fmta_val = start_string .. "\n\t<>\n" .. end_string
+    local start_string = "\\begin{" .. command .. "}"
+    local end_string = "\\end{" .. command .. "}"
+    local fmta_val = start_string .. "\n\t<>\n" .. end_string
 
-  return s(
-    {trig=name, dscr=label},
-    fmta(fmta_val, { i(1)}),
-    { condition = line_begin and cond}
-  )
+    return s(
+	{trig=name, dscr=label},
+	fmta(fmta_val, { i(1)}),
+	{ condition = line_begin and cond}
+    )
 end
 
 -- Fonts

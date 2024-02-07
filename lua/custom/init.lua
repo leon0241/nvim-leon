@@ -4,7 +4,7 @@ vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.conceallevel = 3
+vim.opt.conceallevel = 1
 vim.opt.foldlevelstart = 99
 
 vim.opt.autochdir = true
@@ -16,12 +16,10 @@ local ls = require 'luasnip'
 local s = ls.snippet
 local t = ls.text_node
 
--- LuaSnip mappings - need luasnip to be loaded first
--- vim.keymap.set({"i"}, "<Tab>", function() ls.expand() end, {silent = true})
--- vim.keymap.set({"i", "s"}, "df", function() ls.jump(1) end, {silent = true})
--- vim.keymap.set({"i", "s"}, "<S-Tab>", function() ls.jump(-1) end, {silent = true})
 
-
+require('nvim-autopairs').setup({
+  disable_filetype = { "tex" },
+})
 
 vim.g.vimtex_view_method = 'zathura'
 
@@ -34,6 +32,20 @@ require("luasnip.loaders.from_lua").load({
 ls.setup({
   enable_autosnippets = true,
   store_selection_keys = "<Tab>",
+  -- ext_opts = {
+  --   active = {
+  --     hl_group = "red"
+  --   },
+  --   passive = {
+  --     hl_group = "green"
+  --   },
+  --   visited = {
+  --     hl_group = "yellow"
+  --   },
+  --   unvisited = {
+  --     hl_group = "blue"
+  --   }
+  -- }
 })
 
 ls.add_snippets("all", {

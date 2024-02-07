@@ -25,14 +25,20 @@ local manual_snippet_list = {
     inner_snip("_", "_{<>}", "Custom subscript", in_mathzone),
     inner_snip("sq", "\\sqrt{<>}", "Custom power", in_mathzone),
 
-    object("xx", "\\times", "x times", in_mathzone),
-    object("**", "\\cdot", "center dot", in_mathzone),
-    object("...", "\\dots", "dots", in_mathzone),
-    object("c..", "\\cdots", "center dots", in_mathzone),
-    object("v..", "\\vdots", "vertical dots", in_mathzone),
+    inner_snip("vec", "\\vec{<>}", "vector", in_mathzone),
+    inner_snip("bar", "\\bar{<>}", "vector", in_mathzone),
+    inner_snip("hat", "\\hat{<>}", "vector", in_mathzone),
 
     s(
-	{trig="//", dscr="Fraction"},
+	{trig="tb", dscr="Top and bottom variable", wordTrig=false},
+	fmta(
+	    "^{<>}_{<>}",
+	    {i(1), i(2)}
+	),
+	{ condition = in_mathzone}
+    ),
+    s(
+	{trig="//", dscr="Fraction", wordTrig=false},
 	fmta(
 	    "\\frac{<>}{<>}",
 	    {i(1), i(2)}

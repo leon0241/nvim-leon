@@ -12,7 +12,8 @@ local manual_snippet_list = {
 
     inner_snip("avg", "\\langle <> \\rangle", "Angled Braces", in_mathzone ),
     inner_snip("abs", "\\lvert <> \\rvert", "Absolute Value", in_mathzone ),
-    inner_snip("norm", "\\lVert <> \\rVert", "Norm", in_mathzone),
+    inner_snip("norm", "\\lVert <> \\rVert", "Norm", in_mathzone, 10),
+    inner_snip("(", "(<>)", "Brackets", in_mathzone),
 }
 
 -- Combine automated lists with manual list

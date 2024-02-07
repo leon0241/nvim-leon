@@ -1,10 +1,3 @@
--- Luasnip functions
-local ls = require 'luasnip'
--- local s = ls.snippet
--- local t = ls.text_node
--- local i = ls.insert_node
--- local fmta = require('luasnip.extras.fmt').fmta
-
 -- Import helper functions
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
@@ -16,7 +9,7 @@ local in_text = conditions.in_text
 
 -- Constructor functions
 local inner_snip = funcs.inner_snip
-
+local object = funcs.object
 local mbb_super_sub = funcs.mbb_super_sub
 local mathbb_snippet = funcs.mathbb_snippet
 
@@ -46,6 +39,13 @@ local manual_snippet_list = {
     inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
     inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
 
+    object("dss", "\\displaystyle", "displaystyle", in_mathzone),
+
+    inner_snip("text", "\\text{<>}", "text module", in_mathzone),
+
+    object(",,", ",\\,", "comma space", in_mathzone),
+    object("quad", "\\quad", "quad", in_mathzone),
+    object("qquad", "\\qquad", "qquad", in_mathzone),
 }
 
 -- Combine automated lists with manual list
@@ -55,8 +55,6 @@ end
 
 -- Regular snippets
 local snippets = {
-    inner_snip("f;bf", "\\textbf{<>}", "Text Bold", in_text),
-    inner_snip("f;it", "\\textit{<>}", "Text Italic", in_text),
 }
 
 return snippets, autosnippets

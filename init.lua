@@ -111,7 +111,7 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-
+  --
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
