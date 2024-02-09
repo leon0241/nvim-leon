@@ -95,6 +95,7 @@ return {}, {
 
 	-- Random symbols
 	object("prod", "\\prod", "", in_mathzone),
+	object("log", "\\log", "", in_mathzone),
 	object("pm", "\\pm", "", in_mathzone),
 	object("mp", "\\mp", "", in_mathzone),
 	object("Sq", "\\square", "", in_mathzone),
