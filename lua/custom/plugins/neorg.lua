@@ -11,7 +11,7 @@ return {
                 ["core.dirman"] = { -- Manages Neorg workspaces
                     config = {
                         workspaces = {
-                            leon_neorg = "/data/Documents/git/leon-neorg",
+                            leon_neorg = "/mnt/data/Documents/git/leon-neorg",
                         },
                         default_workspace = "leon_neorg",
                         index = "index.norg",

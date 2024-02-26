@@ -84,12 +84,19 @@ end
 -- Adds a superscripted or subscripted symbol to a mathBB 
 function M.mbb_super_sub(letter, super, sign)
     return s(
-	{trig="\\mathbb{" .. letter .. "}" .. super, wordTrig=false},
+	{trig="\\mathbb{" .. letter .. "}" .. super, wordTrig=false, priority = 100},
 	t("\\mathbb{" .. letter .. "}" .. sign .. "{" .. super .. "}"),
 	{ condition = in_mathzone }
     )
 end
 
+function M.general_super_sub(command, super, sign)
+    return s(
+	{trig=command .. super, wordTrig=false, priority = 100},
+	t(command .. sign .. "{" .. super .. "}"),
+	{ condition = in_mathzone }
+    )
+end
 
 
 -- Greek alphas

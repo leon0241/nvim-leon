@@ -28,6 +28,7 @@ local manual_snippet_list = {
     inner_snip("vec", "\\vec{<>}", "vector", in_mathzone),
     inner_snip("bar", "\\bar{<>}", "vector", in_mathzone),
     inner_snip("hat", "\\hat{<>}", "vector", in_mathzone),
+    inner_snip("udl", "\\underline{<>}", "vector", in_mathzone),
 
     s(
 	{trig="tb", dscr="Top and bottom variable", wordTrig=false},

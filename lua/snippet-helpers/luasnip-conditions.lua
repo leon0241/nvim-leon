@@ -38,6 +38,10 @@ M.in_align = function()  -- TikZ picture environment detection
   return M.in_env('align') or M.in_env('align*')
 end
 
+M.in_pmat = function()  -- TikZ picture environment detection
+  return M.in_env('pmatrix') or M.in_env('matrix') or M.in_env('bmatrix')
+end
+
 function M.get_visual(args, parent)
   if (#parent.snippet.env.LS_SELECT_RAW > 0) then
     return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))

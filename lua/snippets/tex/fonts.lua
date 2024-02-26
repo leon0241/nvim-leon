@@ -11,6 +11,7 @@ local in_text = conditions.in_text
 local inner_snip = funcs.inner_snip
 local object = funcs.object
 local mbb_super_sub = funcs.mbb_super_sub
+local general_super_sub = funcs.general_super_sub
 local mathbb_snippet = funcs.mathbb_snippet
 
 local autosnippets = {}
@@ -32,6 +33,7 @@ local manual_snippet_list = {
     mbb_super_sub("Z", "-", "^"),
 
     mbb_super_sub("N", "0", "_"),
+    general_super_sub("\\ell", "1", "_"),
 
     inner_snip("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
     inner_snip("it", "\\mathit{<>}", "Math Italic", in_mathzone),

@@ -96,11 +96,19 @@ return {}, {
 	-- Random symbols
 	object("prod", "\\prod", "", in_mathzone),
 	object("log", "\\log", "", in_mathzone),
-	object("pm", "\\pm", "", in_mathzone),
+	-- object("pm", "\\pm", "", in_mathzone),
 	object("mp", "\\mp", "", in_mathzone),
 	object("Sq", "\\square", "", in_mathzone),
 	object("nabl", "\\nabla", "", in_mathzone),
 	object("del", "\\nabla", "", in_mathzone),
 	object("xx", "\\times", "", in_mathzone),
 	object("**", "\\cdot", "", in_mathzone),
+	object("ell", "\\ell", "", in_mathzone),
+
+	object("cos", "\\cos", "", in_mathzone),
+	inner_snip("\\cosp", "\\cos(<>)","", in_mathzone),
+	object("sin", "\\sin", "", in_mathzone),
+	inner_snip("\\sinp", "\\sin(<>)","", in_mathzone),
+	object("tan", "\\tan", "", in_mathzone),
+	inner_snip("\\tanp", "\\tan(<>)","", in_mathzone),
 }

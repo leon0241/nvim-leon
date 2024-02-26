@@ -13,6 +13,8 @@ local in_itemize = conditions.in_itemize
 local in_text = conditions.in_text
 local in_env = conditions.in_env
 local in_align = conditions.in_align
+local in_pmat = conditions.in_pmat
+
 
 local inner_snip = funcs.inner_snip
 local object = funcs.object
@@ -119,5 +121,15 @@ return {
 	]], {}
 	),
 	{ condition = in_align }
+    ),
+    s(
+	{trig="j;", wordTrig=false},
+	fmta(
+	    [[
+	\\
+	
+	]], {}
+	),
+	{ condition = in_pmat }
     )
 }
