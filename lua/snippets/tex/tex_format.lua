@@ -9,11 +9,11 @@ local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
 
 local line_begin = conditions.line_begin
-local in_itemize = conditions.in_itemize
+local in_list = conditions.in_list
 local in_text = conditions.in_text
 local in_env = conditions.in_env
 local in_align = conditions.in_align
-local in_pmat = conditions.in_pmat
+local in_mat = conditions.in_mat
 
 
 local inner_snip = funcs.inner_snip
@@ -92,6 +92,20 @@ return {
 	    }
 	)
     ),
+    s(
+	{trig="add;enum", dscr="Add an enumerated list"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{enumerate}
+	    \item <>
+	\end{enumerate}
+	]],
+	    {
+		i(1),
+	    }
+	)
+    ),
 
 },
 
@@ -110,7 +124,7 @@ return {
 	\item 
 	]], {}
 	),
-	{ condition = in_itemize }
+	{ condition = in_list }
     ),
     s(
 	{trig="j;", wordTrig=false},
@@ -123,6 +137,12 @@ return {
 	{ condition = in_align }
     ),
     s(
+	{trig="j[", wordTrig=false},
+	fmta("&", {}
+	),
+	{ condition = in_align }
+    ),
+    s(
 	{trig="j;", wordTrig=false},
 	fmta(
 	    [[
@@ -130,6 +150,12 @@ return {
 	
 	]], {}
 	),
-	{ condition = in_pmat }
+	{ condition = in_mat }
+    ),
+    s(
+	{trig="j[", wordTrig=false},
+	fmta("& ", {}
+	),
+	{ condition = in_mat }
     )
 }

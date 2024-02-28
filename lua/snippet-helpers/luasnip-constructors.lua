@@ -37,12 +37,13 @@ end
 ---@param command string LaTeX code to call
 ---@param label any Label for autocomplete(optional)
 ---@param cond any Expand condition
-function M.object(name, command, label, cond)
+function M.object(name, command, label, cond, prio)
     if label == nil then label = "" end
     if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
 
     return s(
-	{trig=name, dscr=label, wordTrig=false},
+	{trig=name, dscr=label, wordTrig=false, priority=prio},
 	t(command),
 	{ condition = cond }
     )

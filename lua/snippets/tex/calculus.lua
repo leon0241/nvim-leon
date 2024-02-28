@@ -132,4 +132,14 @@ return {},{
 	),
 	{ condition = in_mathzone}
     ),
+    s(
+	{trig = "\\cupb", dscr = "big cup"},
+	t("\\bigcup"),
+	{ condition = in_mathzone}
+    ),
+    s(
+	{trig = "\\capb", dscr = "big cap"},
+	t("\\bigcap"),
+	{ condition = in_mathzone}
+    ),
 }

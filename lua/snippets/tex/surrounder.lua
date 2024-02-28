@@ -1,5 +1,11 @@
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
+local ls = require 'luasnip'
+local s = ls.snippet
+local t = ls.text_node
+local f = ls.function_node
+local i = ls.insert_node
+local fmta = require('luasnip.extras.fmt').fmta
 
 local in_mathzone = conditions.in_mathzone
 local inner_snip = funcs.inner_snip
@@ -13,7 +19,20 @@ local manual_snippet_list = {
     inner_snip("avg", "\\langle <> \\rangle", "Angled Braces", in_mathzone ),
     inner_snip("abs", "\\lvert <> \\rvert", "Absolute Value", in_mathzone ),
     inner_snip("norm", "\\lVert <> \\rVert", "Norm", in_mathzone, 10),
-    inner_snip("(", "(<>)", "Brackets", in_mathzone),
+    inner_snip("(", "(<>)", "Brackets"),
+    inner_snip("[", "[<>]", "Square Brackets"),
+    -- inner_snip("{", "{<>}", "Curly Brackets"),
+ --    s(
+	-- {trig="(%(.*)%)", regTrig=true, wordTrig=false, priority=-1, dscr="don't repeat close bracket"},
+	-- -- fmta(
+	-- --     "<>)",
+	-- --     {
+	-- -- 	f( function(_, snip) return snip.captures[1] end),
+	-- --     }
+	-- -- ),
+	-- t("test"),
+	-- { condition = in_mathzone}
+ --    ),
 }
 
 -- Combine automated lists with manual list

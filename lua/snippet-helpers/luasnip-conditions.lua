@@ -27,8 +27,8 @@ end
 M.in_equation = function()  -- equation environment detection
   return M.in_env('equation')
 end
-M.in_itemize = function()  -- itemize environment detection
-  return M.in_env('itemize')
+M.in_list = function()  -- itemize environment detection
+  return M.in_env('itemize') or M.in_env('enumerate')
 end
 M.in_tikz = function()  -- TikZ picture environment detection
   return M.in_env('tikzpicture')
@@ -38,8 +38,8 @@ M.in_align = function()  -- TikZ picture environment detection
   return M.in_env('align') or M.in_env('align*')
 end
 
-M.in_pmat = function()  -- TikZ picture environment detection
-  return M.in_env('pmatrix') or M.in_env('matrix') or M.in_env('bmatrix')
+M.in_mat = function()  -- TikZ picture environment detection
+  return M.in_env('pmatrix') or M.in_env('matrix') or M.in_env('bmatrix') or M.in_env('vmatrix')
 end
 
 function M.get_visual(args, parent)

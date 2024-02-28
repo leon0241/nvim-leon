@@ -8,7 +8,6 @@ local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
 
 local line_begin = conditions.line_begin
-local in_itemize = conditions.in_itemize
 local in_mathzone = conditions.in_mathzone
 
 local in_text = conditions.in_mathzone
@@ -22,19 +21,10 @@ return {
     -- Multi line named environments
     env_snip("add;align", "align*", "add an align environment", line_begin),
     env_snip("add;nalign", "align", "add a numbered align environment", line_begin),
-
-}, {
-    env_snip("cases", "cases", "add a case environment", line_begin and in_mathzone),
-
-    env_snip("mat", "matrix", "add a matrix", line_begin and in_mathzone),
-    env_snip("pmat", "pmatrix", "add a bracket matrix", line_begin and in_mathzone),
-    env_snip("bmat", "bmatrix", "add a square bracket matrix", line_begin and in_mathzone),
-    env_snip("Bmat", "Bmatrix", "add a curly bracket matrix", line_begin and in_mathzone),
-    env_snip("vmat", "vmatrix", "add a pipe matrix", line_begin and in_mathzone),
-    env_snip("Vmat", "vmatrix", "add a double pipe matrix", line_begin and in_mathzone),
+    env_snip("add;proof", "proof", "add a proof environment", line_begin),
 
     s(
-	{trig = "env", dscr = "Add an environment"},
+	{trig = "add;env", dscr = "Add an environment"},
 	fmta(
 	    [[
 	\begin{<>}
@@ -46,7 +36,16 @@ return {
 		i(2),
 		rep(1)
 	    }
-	),
-	{ condition = in_mathzone }
+	)
     )
+}, {
+    env_snip("cases", "cases", "add a case environment", line_begin and in_mathzone),
+
+    env_snip("mat", "matrix", "add a matrix", line_begin and in_mathzone),
+    env_snip("pmat", "pmatrix", "add a bracket matrix", line_begin and in_mathzone),
+    env_snip("bmat", "bmatrix", "add a square bracket matrix", line_begin and in_mathzone),
+    env_snip("Bmat", "Bmatrix", "add a curly bracket matrix", line_begin and in_mathzone),
+    env_snip("vmat", "vmatrix", "add a pipe matrix", line_begin and in_mathzone),
+    env_snip("Vmat", "vmatrix", "add a double pipe matrix", line_begin and in_mathzone),
+
 }

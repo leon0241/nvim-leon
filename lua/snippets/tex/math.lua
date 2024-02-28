@@ -66,15 +66,20 @@ return {}, {
 	object("=>", "\\implies", "", in_mathzone),
 	object("=<", "\\impliedby", "", in_mathzone),
 	object("iff", "\\iff", "", in_mathzone),
+	s(
+		{trig="\\to>", dscr="rightarrow with text under/above"},
+		fmta("\\xrightarrow[<>]{<>}", { i(1, "below"), i(2, "above") }),
+		{condition = in_mathzone}
+	),
 
 	-- Set Theory
 	object("Exts", "\\exists", "", in_mathzone),
 	object("nExts", "\\nexists", "", in_mathzone),
 	object("fAll", "\\forall", "", in_mathzone),
-	object("sset", "\\subset", "", in_mathzone),
-	object("spet", "\\supset", "", in_mathzone),
+	object("sst", "\\subset", "", in_mathzone),
+	object("spt", "\\supset", "", in_mathzone),
 	object("inn", "\\in", "", in_mathzone),
-	object("eqsset", "\\subseteq", "", in_mathzone),
+	object("\\subsetq", "\\subseteq", "", in_mathzone),
 
 	-- Separators
 	object("para", "\\parallel", "", in_mathzone),
@@ -92,6 +97,8 @@ return {}, {
 	object("...", "\\dots", "", in_mathzone),
 	object("c..", "\\cdots", "", in_mathzone),
 	object("v..", "\\vdots", "", in_mathzone),
+	object(",.,", ",\\dots,", "", in_mathzone),
+	object("+.+", "+\\dots+", "", in_mathzone),
 
 	-- Random symbols
 	object("prod", "\\prod", "", in_mathzone),
@@ -104,6 +111,7 @@ return {}, {
 	object("xx", "\\times", "", in_mathzone),
 	object("**", "\\cdot", "", in_mathzone),
 	object("ell", "\\ell", "", in_mathzone),
+	object("e\\mpt", "\\emptyset", "", in_mathzone),
 
 	object("cos", "\\cos", "", in_mathzone),
 	inner_snip("\\cosp", "\\cos(<>)","", in_mathzone),
