@@ -21,9 +21,15 @@ vim.keymap.set('n', 'H', '^', { desc = 'Start of Line'})
 vim.keymap.set('v', 'L', '$h', { desc = 'End of Line'})
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line'})
 
+-- Hacky solution to get upper case hjkl in select mode
+vim.keymap.set('s', 'H', 'h<Esc>~i', { desc = 'Upper case H'})
+vim.keymap.set('s', 'J', 'j<Esc>~i', { desc = 'Upper case J'})
+vim.keymap.set('s', 'K', 'k<Esc>~i', { desc = 'Upper case K'})
+vim.keymap.set('s', 'L', 'l<Esc>~i', { desc = 'Upper case L'})
+
 -- The classic insert mode shortcut
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Enter insert mode', nowait = true})
-vim.keymap.set('i', 'j#', 't$a', { desc = 'Go to end of LaTeX string'})
+vim.keymap.set('i', 'j#', '<Esc>f$a', { desc = 'Go to end of LaTeX string'})
 
 -- NvimTree
 vim.keymap.set('n', '<C-n>', '<cmd> NvimTreeToggle<CR>')
