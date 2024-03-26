@@ -44,6 +44,14 @@ return {}, {
 		),
 		{condition = in_mathzone}
 	),
+	s(
+		{trig = "basis", dscr="Basis"},
+		fmta(
+			"_{<>}[<>]_{<>}",
+			{ i(1), i(2, "f"), i(3)}
+		),
+		{condition = in_mathzone}
+	),
 
 
 
@@ -94,9 +102,10 @@ return {}, {
 	object("NN", "\\wedge", "", in_mathzone),
 
 	-- Dots
-	object("...", "\\dots", "", in_mathzone),
-	object("c..", "\\cdots", "", in_mathzone),
-	object("v..", "\\vdots", "", in_mathzone),
+	object("..", "\\dots", "", in_mathzone),
+	object("c.", "\\cdots", "", in_mathzone),
+	object("v.", "\\vdots", "", in_mathzone),
+	object("d.", "\\ddots", "", in_mathzone),
 	object(",.,", ",\\dots,", "", in_mathzone),
 	object("+.+", "+\\dots+", "", in_mathzone),
 
@@ -113,6 +122,11 @@ return {}, {
 	object("ell", "\\ell", "", in_mathzone),
 	object("e\\mpt", "\\emptyset", "", in_mathzone),
 
+
+	-- Random operators
+	object("det", "\\det", "", in_mathzone),
+	object("sgn", "\\sgn", "", in_mathzone),
+	object("Mat", "\\Mat", "", in_mathzone),
 	object("cos", "\\cos", "", in_mathzone),
 	inner_snip("\\cosp", "\\cos(<>)","", in_mathzone),
 	object("sin", "\\sin", "", in_mathzone),

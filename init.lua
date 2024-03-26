@@ -196,10 +196,12 @@ require('lazy').setup({
     -- config = function()
     --   vim.cmd.colorscheme 'onedark'
     -- end
-    'maxmx03/dracula.nvim',
+    -- 'maxmx03/dracula.nvim',
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'dracula'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
 
@@ -210,7 +212,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'dracula',
+        theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
       },

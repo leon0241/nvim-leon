@@ -127,6 +127,17 @@ return {
 	{ condition = in_list }
     ),
     s(
+	{trig="jm", wordTrig=false},
+	fmta(
+	    [[
+
+
+	\item $<>$
+	]], {i(1)}
+	),
+	{ condition = in_list }
+    ),
+    s(
 	{trig="j;", wordTrig=false},
 	fmta(
 	    [[
