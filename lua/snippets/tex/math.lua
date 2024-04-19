@@ -47,8 +47,24 @@ return {}, {
 	s(
 		{trig = "basis", dscr="Basis"},
 		fmta(
-			"_{<>}[<>]_{<>}",
+			"{}_{<>}[<>]_{<>}",
 			{ i(1), i(2, "f"), i(3)}
+		),
+		{condition = in_mathzone}
+	),
+	s(
+		{trig = "Repr", dscr="Representing Matrix"},
+		fmta(
+			"{}_{<>}[<>]",
+			{ i(1), i(2, "f")}
+		),
+		{condition = in_mathzone}
+	),
+	s(
+		{trig = "Genr", dscr="Submodule Generator"},
+		fmta(
+			"{}_{<>}\\langle <> \\rangle",
+			{ i(1), i(2, "f")}
 		),
 		{condition = in_mathzone}
 	),
@@ -65,6 +81,8 @@ return {}, {
 	object("~~", "\\sim", "", in_mathzone),
 	object("\\sim~", "\\approx", "", in_mathzone),
 	object("prop", "\\propto", "", in_mathzone),
+	object("ideal", "\\unlhd", "", in_mathzone),
+	
 
 
 	-- Arrows
@@ -121,6 +139,7 @@ return {}, {
 	object("**", "\\cdot", "", in_mathzone),
 	object("ell", "\\ell", "", in_mathzone),
 	object("e\\mpt", "\\emptyset", "", in_mathzone),
+	object("\\\\\\", "\\backslash", "", in_mathzone),
 
 
 	-- Random operators
@@ -133,4 +152,8 @@ return {}, {
 	inner_snip("\\sinp", "\\sin(<>)","", in_mathzone),
 	object("tan", "\\tan", "", in_mathzone),
 	inner_snip("\\tanp", "\\tan(<>)","", in_mathzone),
+
+	-- Phrases
+	object("F-module", "$F$-module", ""),
+	object("R-module", "$R$-module", ""),
 }

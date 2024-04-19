@@ -71,6 +71,14 @@ return {},{
 	{ condition = in_mathzone }
     ),
     s(
+	{trig = "ncint", dscr = "customisable integral no dx", wordTrig = false},
+	fmta(
+	    "\\int_{<>}^{<>} <>",
+	    {i(1, "a"), i(2, "b"), i(3)}
+	),
+	{ condition = in_mathzone }
+    ),
+    s(
 	{trig = "dint", dscr = "dx integral", wordTrig = false},
 	fmta(
 	    "\\int<> d<>",
@@ -81,8 +89,8 @@ return {},{
     s(
 	{trig = "aint", dscr = "area integral", wordTrig = false},
 	fmta(
-	    "\\int_{<>} <> d<>",
-	    {i(1), i(3), i(2, "x")}
+	    "\\int_{<>} <>",
+	    {i(1), i(2)}
 	),
 	{ condition = in_mathzone }
     ),

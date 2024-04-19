@@ -25,6 +25,10 @@ local manual_snippet_list = {
     object("xnn", "x_{n}", "x to the n", in_mathzone),
     object("ynn", "y_{n}", "y to the n", in_mathzone),
     object("fxx", "f(x)", "f(x)", in_mathzone, 10),
+    object("gxx", "g(x)", "f(x)", in_mathzone, 10),
+    object("fnn", "f_{n}", "f(n)", in_mathzone, 10),
+    object("fnx", "f_{n}(x)", "f(n)", in_mathzone, 10),
+    object("cfn", "(f_{n})", "f(n)", in_mathzone, 10),
     object("zxf", "f(x_{0})", "f(x_0)", in_mathzone, 10), -- not consistent but rolls off the hand easier
     object("fyy", "f(y)", "f(y)", in_mathzone, 10),
 
@@ -46,6 +50,8 @@ local manual_snippet_list = {
     inner_snip("bar", "\\overline{<>}", "vector", in_mathzone),
     inner_snip("hat", "\\hat{<>}", "vector", in_mathzone),
     inner_snip("udl", "\\underline{<>}", "vector", in_mathzone),
+    inner_snip("tde", "\\tilde{<>}", "vector", in_mathzone),
+
 
     object("vvc", "\\vec{v}", "v vector", in_mathzone, 10),
     object("0vc", "\\vec{0}", "v vector", in_mathzone, 10),

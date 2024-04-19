@@ -113,7 +113,7 @@ end
 
 -- Theorem box
 function M.thmbox(name, command, label)
-    local start_string = "\\begin{" .. command .. "}[<>]{<>}{}"
+    local start_string = "\\begin{" .. command .. "}[<>]{" .. command .. ":<>}{<>}"
     local end_string = "\\end{" .. command .. "}"
     local fmta_val = start_string .. "\n\t<>\n" .. end_string
 
@@ -122,8 +122,8 @@ function M.thmbox(name, command, label)
 	fmta(fmta_val, {
 	    i(1, "Name"),
 	    i(2, "Label"),
-	    -- i(3, "Number"),
-	    i(3),
+	    i(3, "Number"),
+	    i(4),
 	}),
 	{ condition = line_begin}
     )

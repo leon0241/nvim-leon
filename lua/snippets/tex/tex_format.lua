@@ -29,6 +29,7 @@ return {
     thmbox("add;def", "dfn", "Add a Definition" ),
     thmbox("add;xmp", "xmp", "Add an Example" ),
     thmbox("add;rem", "rem", "Add a Remark" ),
+    thmbox("add;rcl", "rcl", "Add a Remark" ),
 
     -- Single line named expressions
     inner_snip("add;sc", "\\section{<>}", "add a section", line_begin),
@@ -79,11 +80,41 @@ return {
 	)
     ),
     s(
-	{trig="add;item", dscr="Add an itemized list"},
+	{trig="add;item", dscr="add an itemized list"},
 	fmta(
 	-- \renewcommand\labelitemi{\tiny$\bullet$}
 	    [[
 	\begin{itemize}
+	    \item <>
+	\end{itemize}
+	]],
+	    {
+		i(1),
+	    }
+	)
+    ),
+    s(
+	{trig="add;itemns", dscr="add an itemized list with no spacing"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{itemize}
+	    \setlength\itemsep{0em}
+	    \item <>
+	\end{itemize}
+	]],
+	    {
+		i(1),
+	    }
+	)
+    ),
+    s(
+	{trig="add;itemnsl", dscr="add an itemized list"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{itemize}[leftmargin=*]
+	    \setlength\itemsep{0em}
 	    \item <>
 	\end{itemize}
 	]],
@@ -98,6 +129,36 @@ return {
 	-- \renewcommand\labelitemi{\tiny$\bullet$}
 	    [[
 	\begin{enumerate}
+	    \item <>
+	\end{enumerate}
+	]],
+	    {
+		i(1),
+	    }
+	)
+    ),
+    s(
+	{trig="add;enumns", dscr="Add an enumerated list with no spacing"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{enumerate}
+	    \setlength\itemsep{0em}
+	    \item <>
+	\end{enumerate}
+	]],
+	    {
+		i(1),
+	    }
+	)
+    ),
+    s(
+	{trig="add;enumnsl", dscr="Add an enumerated list with no spacing"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{enumerate}[leftmargin=*]
+	    \setlength\itemsep{0em}
 	    \item <>
 	\end{enumerate}
 	]],
@@ -137,6 +198,8 @@ return {
 	),
 	{ condition = in_list }
     ),
+    inner_snip("\\item ;", "\\item[\\textbf{<>}:]", "Text Italic", in_text),
+
     s(
 	{trig="j;", wordTrig=false},
 	fmta(

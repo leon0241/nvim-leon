@@ -47,7 +47,8 @@ local manual_snippet_list = {
 
     object(",,", ",\\,", "comma space", in_mathzone),
     object("quad", "\\quad", "quad", in_mathzone),
-    object("qquad", "\\qquad", "qquad", in_mathzone),
+    object("qquad", "\\qquad", "qquad", in_mathzone, 5),
+    object("vsm", "\\vspace{-5pt}", "qquad"),
 }
 
 -- Combine automated lists with manual list

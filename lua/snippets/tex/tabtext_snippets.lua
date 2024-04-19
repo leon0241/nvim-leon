@@ -19,11 +19,11 @@ local snippet_list = {
 	t("metric space $(X, d)$")
     ),
     s(
-	{trig="let-metric-def", dscr="Let (X,d) be a metric space"},
+	{trig="metric-def-let", dscr="Let (X,d) be a metric space"},
 	t("Let $(X, d)$ be a metric space")
     ),
     s(
-	{trig="let-metric-dd", dscr="Let metric double def"},
+	{trig="metric-dd-let", dscr="Let metric double def"},
 	t("Let $(X, d_{X}),\\,(Y, d_{Y})$ be metric spaces")
     ),
     s(
