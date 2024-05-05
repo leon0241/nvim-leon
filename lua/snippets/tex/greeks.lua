@@ -56,7 +56,7 @@ end
 
 -- Create snippet list
 local manual_snippet_list = {
-    s("pi", t("\\pi"), {condition = in_mathzone})
+    -- s("pi", t("\\pi"), {condition = in_mathzone})
 }
 
 -- Combine automated lists with manual list

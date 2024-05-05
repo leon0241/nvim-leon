@@ -3,9 +3,11 @@ local s = ls.snippet
 local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 local fmta = require('luasnip.extras.fmt').fmta
+local f = ls.function_node
 
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
+local h = require('snippet-helpers.helpers')
 
 local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
@@ -13,9 +15,33 @@ local in_mathzone = conditions.in_mathzone
 local in_text = conditions.in_mathzone
 local in_env = conditions.in_env
 
+
 local env_snip = funcs.env_snip
 
 
+local function env_autoend(args, parent, user_args)
+    local envname = vim.fn['vimtex#env#get_inner']()["name"]
+
+    local newlines = { "align", "align*" }
+
+    if h.is_in(newlines, envname) or envname:sub(-6) == "matrix" then
+    	return "\\\\"
+    else
+	return envname:sub(-6)
+    end
+end
+
+local function env_autostart(args, parent, user_args)
+    local envname = vim.fn['vimtex#env#get_inner']()["name"]
+
+    local nl_math_envs = { "itemize", "enumerate"}
+
+    if h.is_in(nl_math_envs, envname) then
+    	return "\\item "
+    else
+	return ""
+    end
+end
 
 return {
     -- Multi line named environments
@@ -37,8 +63,52 @@ return {
 		rep(1)
 	    }
 	)
-    )
+    ),
+    s(
+	{trig = "add;multi", dscr = "Add a Multicol"},
+	fmta(
+	    [[
+	\begin{multicols}{<>}
+	<>
+	\end{multicols}
+	]],
+	    {
+		i(1, "2"),
+		i(0)
+	    }
+	)
+    ),
+    s(
+	{trig = "add;multibar", dscr = "Add a Multicol with vertical bar"},
+	fmta(
+	    [[
+	\setlength{\columnseprule}{0.5pt}
+	\begin{multicols}{<>}
+	<>
+	\end{multicols}
+	]],
+	    {
+		i(1, "2"),
+		i(0)
+	    }
+	)
+    ),
 }, {
+    s(
+	{trig = "j;", wordTrig=false},
+	fmta(
+	    [[
+	<>
+	<><>
+	]],
+	    {
+		f(env_autoend, {}, {user_args = {"test"}}),
+		f(env_autostart, {}, {user_args = {"test"}}),
+		i(0)
+	    }
+	)
+    ),
+
     env_snip("cases", "cases", "add a case environment", line_begin and in_mathzone),
 
     env_snip("mat", "matrix", "add a matrix", line_begin and in_mathzone),

@@ -177,17 +177,6 @@ return {
 
     -- a;l to create a new line on itemized lists?
     s(
-	{trig="j;", wordTrig=false},
-	fmta(
-	    [[
-
-
-	\item 
-	]], {}
-	),
-	{ condition = in_list }
-    ),
-    s(
 	{trig="jm", wordTrig=false},
 	fmta(
 	    [[
@@ -201,30 +190,10 @@ return {
     inner_snip("\\item ;", "\\item[\\textbf{<>}:]", "Text Italic", in_text),
 
     s(
-	{trig="j;", wordTrig=false},
-	fmta(
-	    [[
-	\\
-	
-	]], {}
-	),
-	{ condition = in_align }
-    ),
-    s(
 	{trig="j[", wordTrig=false},
 	fmta("&", {}
 	),
 	{ condition = in_align }
-    ),
-    s(
-	{trig="j;", wordTrig=false},
-	fmta(
-	    [[
-	\\
-	
-	]], {}
-	),
-	{ condition = in_mat }
     ),
     s(
 	{trig="j[", wordTrig=false},
