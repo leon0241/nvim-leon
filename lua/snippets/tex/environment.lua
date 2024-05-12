@@ -12,12 +12,7 @@ local h = require('snippet-helpers.helpers')
 local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
 
-local in_text = conditions.in_mathzone
-local in_env = conditions.in_env
-
-
 local env_snip = funcs.env_snip
-
 
 local function env_autoend(args, parent, user_args)
     local envname = vim.fn['vimtex#env#get_inner']()["name"]
@@ -27,7 +22,7 @@ local function env_autoend(args, parent, user_args)
     if h.is_in(newlines, envname) or envname:sub(-6) == "matrix" then
     	return "\\\\"
     else
-	return envname:sub(-6)
+	return ""
     end
 end
 
@@ -54,7 +49,7 @@ return {
 	fmta(
 	    [[
 	\begin{<>}
-	<>
+	    <>
 	\end{<>}
 	]],
 	    {
@@ -84,7 +79,7 @@ return {
 	    [[
 	\setlength{\columnseprule}{0.5pt}
 	\begin{multicols}{<>}
-	<>
+	    <>
 	\end{multicols}
 	]],
 	    {

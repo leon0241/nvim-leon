@@ -45,7 +45,9 @@ return {
     env_snip("add;nalign", "align", "add a numbered align environment"),
 
     -- No variable expressions
-    object("add;bar", "\\noindent\\rule{\\textwidth}{0.2pt}", "Add a horizontal bar"),
+    -- object("add;bar", "\\noindent\\rule{\\textwidth}{0.2pt}", "Add a horizontal bar"),
+    object("add;bar", "\\longrule", "Add a horizontal bar"),
+    inner_snip("add;tbar", "\\textrule{<>}", "Add a horizontal bar with text label"),
 
 
     -- Individual snippets
@@ -94,27 +96,11 @@ return {
 	)
     ),
     s(
-	{trig="add;itemns", dscr="add an itemized list with no spacing"},
-	fmta(
-	-- \renewcommand\labelitemi{\tiny$\bullet$}
-	    [[
-	\begin{itemize}
-	    \setlength\itemsep{0em}
-	    \item <>
-	\end{itemize}
-	]],
-	    {
-		i(1),
-	    }
-	)
-    ),
-    s(
-	{trig="add;itemnsl", dscr="add an itemized list"},
+	{trig="add;iteml", dscr="add an itemized list"},
 	fmta(
 	-- \renewcommand\labelitemi{\tiny$\bullet$}
 	    [[
 	\begin{itemize}[leftmargin=*]
-	    \setlength\itemsep{0em}
 	    \item <>
 	\end{itemize}
 	]],
