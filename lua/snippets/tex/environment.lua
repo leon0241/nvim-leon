@@ -4,6 +4,7 @@ local i = ls.insert_node
 local rep = require("luasnip.extras").rep
 local fmta = require('luasnip.extras.fmt').fmta
 local f = ls.function_node
+local k = require("luasnip.nodes.key_indexer").new_key
 
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
@@ -37,6 +38,40 @@ local function env_autostart(args, parent, user_args)
 	return ""
     end
 end
+
+
+-- local function table_auto(args, parent, user_args)
+--     
+--     return '[' .. args[1][1] .. user_args .. ']'
+-- end
+
+-- s("trig", {
+--   i(1), t '<-i(1) ',
+--   f(fn,  -- callback (args, parent, user_args) -> string
+--     {2}, -- node indice(s) whose text is passed to fn, i.e. i(2)
+--     { user_args = { "user_args_value" }} -- opts
+--   ),
+--   t ' i(2)->', i(2), t '<-i(2) i(0)->', i(0)
+-- })
+--
+--     s(
+-- 	{trig = "add;table", dscr = "Add a table"},
+-- 	fmta(
+-- 	    [[
+-- 	\begin{tabular}{ |<>| }
+-- 	    <>
+-- 	\end{tabular}
+-- 	]],
+-- 	    {
+-- 		i(1, "", {key="table_cols"}),
+-- 		f(table_auto, {k("table_cols")}
+--
+-- 	    )
+-- 	    }
+-- 	)
+--     ),
+--
+
 
 return {
     -- Multi line named environments
@@ -88,6 +123,23 @@ return {
 	    }
 	)
     ),
+
+    s(
+	{trig = "add;table", dscr = "Add a table"},
+	fmta(
+	    [[
+	\begin{tabular}{ |<>| }
+	    <>
+	\end{tabular}
+	]],
+	    {
+		i(1, "name"),
+		i(2),
+	    }
+	)
+    ),
+
+
 }, {
     s(
 	{trig = "j;", wordTrig=false},
@@ -103,6 +155,7 @@ return {
 	    }
 	)
     ),
+
 
     env_snip("cases", "cases", "add a case environment", line_begin and in_mathzone),
 

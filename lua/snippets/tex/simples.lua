@@ -51,6 +51,7 @@ return {}, {
     object("spt", "\\supset", "", in_mathzone),
     object("inn", "\\in", "", in_mathzone),
     object("\\subsetq", "\\subseteq", "", in_mathzone),
+    object("nsg", "\\unlhd", "Normal SubGroup", in_mathzone),
 
     -- Separators
     object("para", "\\parallel", "", in_mathzone),

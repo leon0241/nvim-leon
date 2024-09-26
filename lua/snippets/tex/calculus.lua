@@ -127,16 +127,16 @@ return {},{
     s(
 	{trig = "CAP", dscr = "big cap"},
 	fmta(
-	    "\\bigcap\\limits_{<> \\in\\mathbb{N}}^{<>}",
-	    {i(1, "n"), i(2, "\\infty")}
+	    "\\bigcap\\limits_{<>}^{<>}",
+	    {i(1), i(2)}
 	),
 	{ condition = in_mathzone}
     ),
     s(
 	{trig = "CUP", dscr = "big cup"},
 	fmta(
-	    "\\bigcup\\limits_{<> \\in\\mathbb{N}}^{<>}",
-	    {i(1, "n"), i(2, "\\infty")}
+	    "\\bigcup\\limits_{<>}^{<>}",
+	    {i(1), i(2)}
 	),
 	{ condition = in_mathzone}
     ),

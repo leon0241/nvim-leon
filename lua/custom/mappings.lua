@@ -24,8 +24,9 @@ vim.keymap.set('v', 'H', '^', { desc = 'Start of Line'})
 -- Hacky solution to get upper case hjkl in select mode
 vim.keymap.set('s', 'H', 'h<Esc>~i', { desc = 'Upper case H'})
 vim.keymap.set('s', 'J', 'j<Esc>~i', { desc = 'Upper case J'})
-vim.keymap.set('s', 'j', 'j<Esc>a', { desc = 'Upper case J'})
+vim.keymap.set('s', 'j', 'j<Esc>a', { desc = 'lowercase j'})
 vim.keymap.set('s', 'K', 'k<Esc>~i', { desc = 'Upper case K'})
+vim.keymap.set('s', 'k', 'k<Esc>a', { desc = 'lowercase k'})
 vim.keymap.set('s', 'L', 'l<Esc>~i', { desc = 'Upper case L'})
 
 -- The classic insert mode shortcut
