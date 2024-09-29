@@ -40,6 +40,8 @@ local manual_snippet_list = {
     inner_snip("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
     inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
     inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
+    
+    object("top", "\\mathcal{T}", "Topology", in_mathzone),
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
 
