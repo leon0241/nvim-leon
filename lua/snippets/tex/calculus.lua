@@ -123,23 +123,6 @@ return {},{
 	),
 	{ condition = in_mathzone }
     ),
-
-    s(
-	{trig = "CAP", dscr = "big cap"},
-	fmta(
-	    "\\bigcap\\limits_{<>}^{<>}",
-	    {i(1), i(2)}
-	),
-	{ condition = in_mathzone}
-    ),
-    s(
-	{trig = "CUP", dscr = "big cup"},
-	fmta(
-	    "\\bigcup\\limits_{<>}^{<>}",
-	    {i(1), i(2)}
-	),
-	{ condition = in_mathzone}
-    ),
     s(
 	{trig = "\\cupb", dscr = "big cup"},
 	t("\\bigcup"),
@@ -148,6 +131,16 @@ return {},{
     s(
 	{trig = "\\capb", dscr = "big cap"},
 	t("\\bigcap"),
+	{ condition = in_mathzone}
+    ),
+    s(
+	{trig = "\\bigcupq", dscr = "big square cup"},
+	t("\\bigsqcup"),
+	{ condition = in_mathzone}
+    ),
+    s(
+	{trig = "\\bigcapq", dscr = "big square cap"},
+	t("\\bigsqcap"),
 	{ condition = in_mathzone}
     ),
 }

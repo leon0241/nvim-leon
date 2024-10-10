@@ -604,6 +604,12 @@ local servers = {
   ltex = {
     ltex = {
       language = "en-GB",
+      disabledRules = {
+        ['en-GB'] = {"OXFORD_SPELLING_Z_NOT_S"}
+      },
+      dictionary = {
+        ['en-GB'] = {"iff", "Hausdorff", "WTS", "bisimulation"}
+      }
     }
   }
 }

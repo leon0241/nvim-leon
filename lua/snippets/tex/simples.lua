@@ -1,16 +1,19 @@
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
+local f = ls.function_node
 local fmta = require('luasnip.extras.fmt').fmta
 
 
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
+local postfix = require('luasnip.extras.postfix').postfix
 
 local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
 
 local object = funcs.object
+local var_postfixer = funcs.var_postfixer
 local inner_snip = funcs.inner_snip
 
 
@@ -37,9 +40,14 @@ return {}, {
     object("=>", "\\implies", "", in_mathzone),
     object("=<", "\\impliedby", "", in_mathzone),
     object("iff", "\\iff", "", in_mathzone),
+ --    s(
+	-- {trig="\\to>", dscr="rightarrow with text under/above"},
+	-- fmta("\\xrightarrow{<>}", { i(1)}),
+	-- {condition = in_mathzone}
+ --    ),
     s(
 	{trig="\\to>", dscr="rightarrow with text under/above"},
-	fmta("\\xrightarrow[<>]{<>}", { i(1, "below"), i(2, "above") }),
+	fmta("\\prightarrow{<>}", { i(1)}),
 	{condition = in_mathzone}
     ),
 
@@ -51,7 +59,17 @@ return {}, {
     object("spt", "\\supset", "", in_mathzone),
     object("inn", "\\in", "", in_mathzone),
     object("\\subsetq", "\\subseteq", "", in_mathzone),
-    object("nsg", "\\unlhd", "Normal SubGroup", in_mathzone),
+    object("ntri", "\\lhd", "Normal Subgroup", in_mathzone),
+    -- var_postfixer("sg", "$", "$-subgroup", "n-subgroup"),
+
+    postfix("sg", {
+	f(function(_, parent)
+	    return parent.snippet.env.POSTFIX_MATCH:sub(1, -2) .. "$" .. parent.snippet.env.POSTFIX_MATCH:sub(-1) .. "$-subgroup"
+	end, {}),
+	
+    },
+    { condition = not in_mathzone }
+    ),
 
     -- Separators
     object("para", "\\parallel", "", in_mathzone),
@@ -103,15 +121,6 @@ return {}, {
     -- Phrases
     object("F-module", "$F$-module", ""),
     object("R-module", "$R$-module", ""),
-
-
-
-    -- Fonts
-    inner_snip("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
-    inner_snip("it", "\\mathit{<>}", "Math Italic", in_mathzone),
-    inner_snip("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
-    inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
-    inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
 

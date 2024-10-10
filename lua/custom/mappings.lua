@@ -50,6 +50,26 @@ vim.keymap.set('n', '<Leader>fg', '<cmd> Telescope live_grep<CR>', { desc = 'Tel
 
 vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
 
+-- inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+--'.!inkscape-figures create "
+--'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+-- nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+vim.keymap.set(
+  'i',
+  '<C-f>',
+  "<Esc><cmd> exec '.!inkscape-figures create \"'.getline('.').'\" \"'.b:vimtex.root.'/figures/\"'<CR><CR>:w<CR>'",
+  {noremap = true}
+)
+
+-- vim.keymap.set(
+--   'n',
+--   '<C-f>',
+--   "<cmd> exec '.!inkscape-figures edit \"'.b:vimtex.root.'/figures/\" > /dev/null 2 > &1 & '<CR><CR>:w<CR>'",
+--   {noremap = true}
+-- )
+
+--     "<Esc><cmd>exec 'r!inkscape-figures-manager new -f -d figures -l \"'.getline('.').'\"'<CR>kkkkkkddjjjf{a"
+
 -- -- -- UltiSnips
 -- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsExpandTrigger', { desc = "Expand UltiSnips"})
 -- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsJumpForwardTrigger', { desc = "Expand UltiSnips"})

@@ -17,6 +17,7 @@ local in_mat = conditions.in_mat
 
 
 local inner_snip = funcs.inner_snip
+local visual_insert = funcs.visual_insert
 local object = funcs.object
 local env_snip = funcs.env_snip
 local thmbox = funcs.thmbox
@@ -29,7 +30,8 @@ return {
     thmbox("add;def", "dfn", "Add a Definition" ),
     thmbox("add;xmp", "xmp", "Add an Example" ),
     thmbox("add;rem", "rem", "Add a Remark" ),
-    thmbox("add;rcl", "rcl", "Add a Remark" ),
+    thmbox("add;lma", "lma", "Add a Lemma" ),
+    thmbox("add;qst", "qst", "Add a Question" ),
 
     -- Single line named expressions
     inner_snip("add;sc", "\\section{<>}", "add a section", line_begin),
@@ -58,9 +60,10 @@ return {
 	\begin{figure}[H]
 	    \centering
 	    \includegraphics[width=\linewidth]{<>}
+	    \caption{<>}
 	\end{figure}
 	]],
-	    { i(1, "url")}
+	    { i(1), i(2)}
 	)
     ),
     s(
@@ -173,9 +176,13 @@ return {
 },
 
 {
-    -- -- Fonts
-    inner_snip("tbb", "\\textbf{<>}", "Text Bold", in_text),
-    inner_snip("tii", "\\textit{<>}", "Text Italic", in_text),
+    -- -- -- Fonts
+    -- inner_snip("tbb", "\\textbf{<>}", "Text Bold", in_text),
+    -- inner_snip("tii", "\\textit{<>}", "Text Italic", in_text),
+
+
+    visual_insert("tii", "\\textit{<>}", "Text Italic", in_text),
+    visual_insert("tbb", "\\textbf{<>}", "Text Italic", in_text),
 
     -- a;l to create a new line on itemized lists?
     s(

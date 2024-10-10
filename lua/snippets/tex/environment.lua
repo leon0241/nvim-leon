@@ -15,6 +15,8 @@ local in_mathzone = conditions.in_mathzone
 
 local env_snip = funcs.env_snip
 
+
+-- Determines what kind of command to suffix at the end of a new line in an environment using j;
 local function env_autoend(args, parent, user_args)
     local envname = vim.fn['vimtex#env#get_inner']()["name"]
 
@@ -27,6 +29,7 @@ local function env_autoend(args, parent, user_args)
     end
 end
 
+-- Determines what kind of command to prefix at the start of a new line in an environment using j;
 local function env_autostart(args, parent, user_args)
     local envname = vim.fn['vimtex#env#get_inner']()["name"]
 

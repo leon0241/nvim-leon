@@ -12,6 +12,8 @@ vim.opt.autochdir = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
 
+vim.opt.scrolloff = 7
+
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
@@ -49,6 +51,9 @@ require("luasnip.loaders.from_lua").load({
   paths = {"~/.config/nvim/lua/snippets"}
 })
 
+require("luasnip").config.set_config({
+  store_selection_keys = "<Tab>",
+})
 
 ls.setup({
   enable_autosnippets = true,
@@ -85,8 +90,8 @@ cmp.setup {
     completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-k>'] = cmp.mapping.select_next_item(),
-    ['<C-j>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},

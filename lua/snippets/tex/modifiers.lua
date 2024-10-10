@@ -11,6 +11,9 @@ local funcs = require('snippet-helpers.luasnip-constructors')
 
 local in_mathzone = conditions.in_mathzone
 local inner_snip = funcs.inner_snip
+local visual_insert = funcs.visual_insert
+local visual_insert_2 = funcs.visual_insert_2
+local var_postfixer = funcs.var_postfixer
 local object = funcs.object
 
 local snippet_list = {}
@@ -46,17 +49,28 @@ local manual_snippet_list = {
     inner_snip("_", "_{<>}", "Custom subscript", in_mathzone),
     inner_snip("sq", "\\sqrt{<>}", "Custom power", in_mathzone),
 
-    inner_snip("vc", "\\vec{<>}", "vector", in_mathzone),
-    inner_snip("bar", "\\overline{<>}", "vector", in_mathzone),
-    inner_snip("hat", "\\hat{<>}", "vector", in_mathzone),
-    inner_snip("udl", "\\underline{<>}", "vector", in_mathzone),
-    inner_snip("tde", "\\tilde{<>}", "vector", in_mathzone),
+    visual_insert("vc", "\\vec{<>}", "vector", in_mathzone),
+    visual_insert("bar", "\\overline{<>}", "vector", in_mathzone),
+    visual_insert("hat", "\\hat{<>}", "vector", in_mathzone),
+    visual_insert("udl", "\\underline{<>}", "vector", in_mathzone),
+    visual_insert("tde", "\\tilde{<>}", "vector", in_mathzone),
+
+
+    var_postfixer("vc", "\\vec", "Postfix Variable to vector", in_mathzone, 10),
+    var_postfixer("bar", "\\overline", "Postfix Variable to overbar", in_mathzone, 10),
+    var_postfixer("hat", "\\hat", "Postfix Variable to hat", in_mathzone, 10),
+    var_postfixer("udl", "\\underline", "Postfix Variable to underline", in_mathzone, 10),
+    var_postfixer("tde", "\\tilde", "Postfix Variable to tilde", in_mathzone, 10),
 
 
     object("vvc", "\\vec{v}", "v vector", in_mathzone, 10),
     object("0vc", "\\vec{0}", "v vector", in_mathzone, 10),
 
+    visual_insert_2("ubr", "\\underbrace{<>}_{<>}", "underbrace", in_mathzone),
+    visual_insert_2("obr", "\\overbrace{<>}_{<>}", "underbrace", in_mathzone),
 
+    inner_snip("_{tx", "_{\\text{<>}", "add text to subscripts", in_mathzone),
+    inner_snip("^{tx", "^{\\text{<>}", "add text to superscripts", in_mathzone),
 
     s(
 	{trig="tb", dscr="Top and bottom variable", wordTrig=false},
@@ -109,19 +123,6 @@ local manual_snippet_list = {
 	),
 	{ condition = in_mathzone}
     ),
- --    s(
-	-- {trig="(%()(.*((\\frac)*(\\sum)*(\\int)*)+.*)(%))", regTrig=true, wordTrig=false, priority=-1, dscr="auto-indent variables 2"},
-	-- fmta(
-	--     "\\left<><>\\right<>",
-	--     {
-	-- 	f( function(_, snip) return snip.captures[1] end),
-	-- 	f( function(_, snip) return snip.captures[2] end),
-	-- 	f( function(_, snip) return snip.captures[3] end),
-	--     }
-	-- ),
-	-- { condition = in_mathzone}
- --    ),
-
 }
 
 -- Combine automated lists with manual list

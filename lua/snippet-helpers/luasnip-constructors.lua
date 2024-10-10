@@ -2,10 +2,13 @@ local M = {}
 
 local ls = require("luasnip")
 local sn = ls.snippet_node
+local d = ls.dynamic_node
 local s = ls.snippet
 local i = ls.insert_node
 local t = ls.text_node
+local f = ls.function_node
 local fmta = require('luasnip.extras.fmt').fmta
+local postfix = require('luasnip.extras.postfix').postfix
 
 local conditions = require('snippet-helpers.luasnip-conditions')
 
@@ -70,6 +73,73 @@ function M.env_snip(name, command, label, cond)
 	{ condition = line_begin and cond}
     )
 end
+
+function M.visual_insert(name, command, label, cond, prio)
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
+
+
+    return s(
+	{trig=name, dscr=label, prio=prio},
+	fmta(command,
+	    {
+		d(1, conditions.get_visual)
+	    }
+	),
+	{ condition = cond }
+    )
+end
+
+function M.visual_insert_2(name, command, label, cond, prio)
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
+
+
+    return s(
+	{trig=name, dscr=label, prio=prio},
+	fmta(command,
+	    {
+		d(1, conditions.get_visual),
+		i(2)
+	    }
+	),
+	{ condition = cond }
+    )
+end
+
+function M.var_postfixer(name, command, label, cond, prio)
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
+
+    return postfix(name, {
+	f(function(_, parent)
+	    return parent.snippet.env.POSTFIX_MATCH:sub(1, -2) .. command .. "{" .. parent.snippet.env.POSTFIX_MATCH:sub(-1) .. "}"
+	end, {}),
+	
+    },
+    { condition = cond }
+    )
+end
+
+function M.postfixer(name, command_start, command_end, label, cond, prio)
+    if label == nil then label = "" end
+    if cond == nil then cond = function() return true end end
+    if prio == nil then prio = 0 end
+
+    return postfix(name, {
+	f(function(_, parent)
+	    return command_start .. parent.snippet.env.POSTFIX_MATCH:sub(-1) .. command_end
+	end, {}),
+	
+    },
+    { condition = cond }
+    )
+end
+
+
 
 -- Fonts
 
