@@ -83,6 +83,19 @@ return {
     env_snip("add;proof", "proof", "add a proof environment", line_begin),
 
     s(
+	{trig = "add;prooftree", dscr = "Add a proof tree"},
+	fmta(
+	    [[
+	\prftree{<>}{<>}
+	]],
+	    {
+		i(1),
+		i(2),
+	    }
+	)
+    ),
+
+    s(
 	{trig = "add;env", dscr = "Add an environment"},
 	fmta(
 	    [[
@@ -168,5 +181,4 @@ return {
     env_snip("Bmat", "Bmatrix", "add a curly bracket matrix", line_begin and in_mathzone),
     env_snip("vmat", "vmatrix", "add a pipe matrix", line_begin and in_mathzone),
     env_snip("Vmat", "vmatrix", "add a double pipe matrix", line_begin and in_mathzone),
-
 }

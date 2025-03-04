@@ -21,7 +21,7 @@ local manual_snippet_list = {
     inner_snip("norm", "\\lVert <> \\rVert", "Norm", in_mathzone, 10),
     inner_snip("(", "(<>)", "Brackets"),
     inner_snip("[", "[<>]", "Square Brackets"),
-    -- inner_snip("{", "{<>}", "Curly Brackets"),
+    inner_snip("{", "{<>}", "Curly Brackets"),
  --    s(
 	-- {trig="(%(.*)%)", regTrig=true, wordTrig=false, priority=-1, dscr="don't repeat close bracket"},
 	-- -- fmta(

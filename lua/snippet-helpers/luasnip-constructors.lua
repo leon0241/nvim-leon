@@ -190,9 +190,9 @@ function M.thmbox(name, command, label)
     return s(
 	{trig=name, dscr=label},
 	fmta(fmta_val, {
-	    i(1, "Name"),
-	    i(2, "Label"),
-	    i(3, "Number"),
+	    i(1, "title"),
+	    i(2),
+	    i(3),
 	    i(4),
 	}),
 	{ condition = line_begin}

@@ -28,6 +28,7 @@ return {}, {
     object("<<", "\\ll", "", in_mathzone),
     object("~~", "\\sim", "", in_mathzone),
     object("\\sim~", "\\approx", "", in_mathzone),
+    object("~=", "\\simeq", "", in_mathzone),
     object("prop", "\\propto", "", in_mathzone),
     object("ideal", "\\unlhd", "", in_mathzone),
 
@@ -39,12 +40,10 @@ return {}, {
     object("!>", "\\mapsto", "", in_mathzone),
     object("=>", "\\implies", "", in_mathzone),
     object("=<", "\\impliedby", "", in_mathzone),
+    object("|=", "\\models", "", in_mathzone),
     object("iff", "\\iff", "", in_mathzone),
- --    s(
-	-- {trig="\\to>", dscr="rightarrow with text under/above"},
-	-- fmta("\\xrightarrow{<>}", { i(1)}),
-	-- {condition = in_mathzone}
- --    ),
+
+    -- Right arrow mod
     s(
 	{trig="\\to>", dscr="rightarrow with text under/above"},
 	fmta("\\prightarrow{<>}", { i(1)}),
@@ -59,6 +58,7 @@ return {}, {
     object("spt", "\\supset", "", in_mathzone),
     object("inn", "\\in", "", in_mathzone),
     object("\\subsetq", "\\subseteq", "", in_mathzone),
+    object("\\subseteqq", "\\sqsubseteq", "", in_mathzone),
     object("ntri", "\\lhd", "Normal Subgroup", in_mathzone),
     -- var_postfixer("sg", "$", "$-subgroup", "n-subgroup"),
 
@@ -79,15 +79,17 @@ return {}, {
 
     -- uhh logic and cap cup things
     object("cap", "\\cap", "", in_mathzone),
+    object("\\capq", "\\sqcap", "", in_mathzone),
     object("cup", "\\cup", "", in_mathzone),
+    object("\\cupq", "\\sqcup", "", in_mathzone),
     object("VV", "\\vee", "", in_mathzone),
     object("NN", "\\wedge", "", in_mathzone),
 
     -- Dots
     object("..", "\\dots", "", in_mathzone),
-    object("c.", "\\cdots", "", in_mathzone),
-    object("v.", "\\vdots", "", in_mathzone),
-    object("d.", "\\ddots", "", in_mathzone),
+    object("c..", "\\cdots", "", in_mathzone, 10),
+    object("v..", "\\vdots", "", in_mathzone, 10),
+    object("d..", "\\ddots", "", in_mathzone, 10),
     object(",.,", ",\\dots,", "", in_mathzone),
     object("+.+", "+\\dots+", "", in_mathzone),
 
@@ -118,6 +120,13 @@ return {}, {
     inner_snip("\\cosp", "\\cos(<>)","", in_mathzone),
     inner_snip("\\tanp", "\\tan(<>)","", in_mathzone),
 
+    -- Process Algebras
+    inner_snip("trans", "\\trans{<>}","", in_mathzone),
+    object("sua", "\\square", "", in_mathzone),
+    object("pco", "\\pcomp", "", in_mathzone),
+    
+
+
     -- Phrases
     object("F-module", "$F$-module", ""),
     object("R-module", "$R$-module", ""),
@@ -125,6 +134,4 @@ return {}, {
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
 
     inner_snip("text", "\\text{<>}", "text module", in_mathzone),
-
-
 }

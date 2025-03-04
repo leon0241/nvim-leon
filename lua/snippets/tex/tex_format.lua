@@ -32,9 +32,14 @@ return {
     thmbox("add;rem", "rem", "Add a Remark" ),
     thmbox("add;lma", "lma", "Add a Lemma" ),
     thmbox("add;qst", "qst", "Add a Question" ),
+    thmbox("add;crl", "crl", "Add a Corollary" ),
+    thmbox("add;rcl", "rcl", "Add a Recall" ),
+    thmbox("add;ppn", "ppn", "Add a Proposition" ),
+    
 
     -- Single line named expressions
     inner_snip("add;sc", "\\section{<>}", "add a section", line_begin),
+    inner_snip("add;ch", "\\chapter{<>}", "add a section", line_begin),
     inner_snip("add;nsc", "\\section*{<>}", "add an unnumbered section", line_begin),
     inner_snip("add;ss", "\\subsection{<>}", "add a subsection", line_begin),
     inner_snip("add;nss", "\\subsection*{<>}", "add an unnumbered subsection", line_begin),
@@ -176,10 +181,8 @@ return {
 },
 
 {
-    -- -- -- Fonts
-    -- inner_snip("tbb", "\\textbf{<>}", "Text Bold", in_text),
-    -- inner_snip("tii", "\\textit{<>}", "Text Italic", in_text),
-
+    -- Reference
+    inner_snip("ref", "\\ref{<>}", "References"),
 
     visual_insert("tii", "\\textit{<>}", "Text Italic", in_text),
     visual_insert("tbb", "\\textbf{<>}", "Text Italic", in_text),

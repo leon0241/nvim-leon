@@ -50,6 +50,15 @@ vim.keymap.set('n', '<Leader>fg', '<cmd> Telescope live_grep<CR>', { desc = 'Tel
 
 vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
 
+
+-- Zotero
+vim.keymap.set('n', '<Leader>zf', '<Cmd> Telescope bibtex<CR>', { desc = "Find Zotero Citation"})
+
+
+
+
+
+
 -- inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 --'.!inkscape-figures create "
 --'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
@@ -60,36 +69,7 @@ vim.keymap.set(
   "<Esc><cmd> exec '.!inkscape-figures create \"'.getline('.').'\" \"'.b:vimtex.root.'/figures/\"'<CR><CR>:w<CR>'",
   {noremap = true}
 )
-
--- vim.keymap.set(
---   'n',
---   '<C-f>',
---   "<cmd> exec '.!inkscape-figures edit \"'.b:vimtex.root.'/figures/\" > /dev/null 2 > &1 & '<CR><CR>:w<CR>'",
---   {noremap = true}
--- )
-
---     "<Esc><cmd>exec 'r!inkscape-figures-manager new -f -d figures -l \"'.getline('.').'\"'<CR>kkkkkkddjjjf{a"
-
--- -- -- UltiSnips
--- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsExpandTrigger', { desc = "Expand UltiSnips"})
--- vim.keymap.set('n', '<Tab>', '<cmd> UltiSnipsJumpForwardTrigger', { desc = "Expand UltiSnips"})
--- vim.keymap.set('n', 'S-<Tab>', '<cmd> UltiSnipsJumpBackwardsTrigger', { desc = "Expand UltiSnips"})
-
 -- LazyGit
 vim.keymap.set('n', '<Leader>lg', '<cmd> LazyGit<CR>', { desc = 'Enter LazyGit'})
 
 vim.keymap.set('n',  '<leader>p', '<cmd> lua require("nabla").popup()<CR>', {desc = 'nabla'})
--- Customize with popup({border = ...})  : `single` (default), `double`, `rounded`
---
--- Neorg
--- vim.keymap.set('v', '<Leader>ml', 'S]', { desc = 'Neorg link WIP'})
-
-
--- Luasnip
--- local ls = require 'luasnip' 
-
--- vim.keymap.set({"i", "s"}, "<>", function()
--- 	if ls.choice_active() then
--- 		ls.change_choice(1)
--- 	end
--- end, {silent = true})

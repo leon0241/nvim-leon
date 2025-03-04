@@ -11,6 +11,7 @@ local f = require("luasnip").function_node
 -- Constructor functions
 local inner_snip = funcs.inner_snip
 local visual_insert = funcs.visual_insert
+local visual_insert_2 = funcs.visual_insert_2
 local object = funcs.object
 local mbb_super_sub = funcs.mbb_super_sub
 local general_super_sub = funcs.general_super_sub
@@ -40,12 +41,24 @@ local manual_snippet_list = {
     general_super_sub("\\ell", "1", "_"),
 
     visual_insert("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
+    visual_insert("tt", "\\mathtt{<>}", "Math Typewriter", in_mathzone),
     visual_insert("it", "\\mathit{<>}", "Math Italic", in_mathzone),
     visual_insert("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
     visual_insert("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
     visual_insert("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
+
+ --    inner_snip("add;texstring", "\\texorpdfstring{<>}", "add a package", line_begin),
+ --    s(
+	-- {trig = "add;texstring", dscr="Add a Tex or PDF String", prio=0},
+	-- fmts("\\texorpdfstring{<>}{<>}"),
+	-- {
+	--     d(1, conditions.get_visual),
+	--     
+	-- }
+ --    )
+
     
-    object("top", "\\mathcal{T}", "Topology", in_mathzone),
+    object("topo", "\\mathcal{T}", "Topology", in_mathzone),
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
 
@@ -61,13 +74,17 @@ local manual_snippet_list = {
     inner_snip("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
     inner_snip("it", "\\mathit{<>}", "Math Italic", in_mathzone),
     inner_snip("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
+    inner_snip("tt", "\\mathtt{<>}", "Math Bold", in_mathzone),
     inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
     inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
+    inner_snip("scr", "\\mathscr{<>}", "Mathscript", in_mathzone),
+
+    object("\\mathscr{}i", "scri", "Mathscript", in_mathzone),
 
     var_postfixer("bb", "\\mathbb", "Postfix Variable to mathbb", in_mathzone, 10),
-    var_postfixer("rm", "\\mathrm", "Postfix Variable to mathrm", in_mathzone, 10),
+var_postfixer("rm", "\\mathrm", "Postfix Variable to mathrm", in_mathzone, 10),
     var_postfixer("mc", "\\mathcal", "Postfix Variable to mathcal", in_mathzone, 10),
-
+    var_postfixer("scr", "\\mathscr", "Postfix Variable to mathscript", in_mathzone, 10),
 }
 
 -- Combine automated lists with manual list
@@ -77,6 +94,8 @@ end
 
 -- Regular snippets
 local snippets = {
+
+    visual_insert_2("texstring", "\\texorpdfstring{$<>$}{<>}", "Add a Tex or PDF String", in_mathzone),
 }
 
 return snippets, autosnippets
