@@ -1,5 +1,6 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
+--
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -46,12 +47,14 @@ vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.conceallevel = 1
+
+-- Folding. Related: UFO settings in plugin-config
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = '0'
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
-
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- changes the directory with each file open
 vim.opt.autochdir = false

@@ -4,6 +4,8 @@
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
+--
+
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -16,27 +18,31 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
+  -- LSP Configuration & Plugins
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
 
+      -- Mason Linting
+      'mfussenegger/nvim-lint',
+
+      -- Mason Formatting
+      'mhartington/formatter.nvim',
+
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      'folke/lazydev.nvim',
     },
   },
 
+  -- Autocompletion
   {
-    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
@@ -171,7 +177,7 @@ require('lazy').setup({
         lualine_z = { 'location' },
       },
       tabline = {},
-      extensions = { 'nvim-tree' },
+      extensions = { 'nvim-tree'},
     },
   },
 
@@ -207,6 +213,13 @@ require('lazy').setup({
         end,
       },
     },
+  },
+
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async'
+    }
   },
 
   {

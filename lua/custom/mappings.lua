@@ -62,6 +62,12 @@ vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").l
 vim.keymap.set('n', '<Leader>zf', '<Cmd> Telescope bibtex<CR>', { desc = "Find Zotero Citation"})
 
 
+-- UFO
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+-- vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+-- vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+
 
 -- inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 --'.!inkscape-figures create "
