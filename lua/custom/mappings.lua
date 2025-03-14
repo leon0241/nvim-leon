@@ -21,6 +21,13 @@ vim.keymap.set('n', 'H', '^', { desc = 'Start of Line'})
 vim.keymap.set('v', 'L', '$h', { desc = 'End of Line'})
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line'})
 
+-- God paste
+vim.keymap.set({'n', 'v'}, '<leader>p', "\"_dp", { desc = 'Start of Line'})
+
+-- Center up and down page
+vim.keymap.set('n', '<C-d>', "<C-d>zz", { desc = 'Down one screen and center'})
+vim.keymap.set('n', '<C-u>', "<C-u>zz", { desc = 'Up one screen and center'})
+
 -- Hacky solution to get upper case hjkl in select mode
 vim.keymap.set('s', 'H', 'h<Esc>~i', { desc = 'Upper case H'})
 vim.keymap.set('s', 'J', 'j<Esc>~i', { desc = 'Upper case J'})
@@ -56,9 +63,6 @@ vim.keymap.set('n', '<Leader>zf', '<Cmd> Telescope bibtex<CR>', { desc = "Find Z
 
 
 
-
-
-
 -- inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 --'.!inkscape-figures create "
 --'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
@@ -70,6 +74,8 @@ vim.keymap.set(
   {noremap = true}
 )
 -- LazyGit
+-- LazyGit
+--
 vim.keymap.set('n', '<Leader>lg', '<cmd> LazyGit<CR>', { desc = 'Enter LazyGit'})
 
-vim.keymap.set('n',  '<leader>p', '<cmd> lua require("nabla").popup()<CR>', {desc = 'nabla'})
+vim.keymap.set('n',  '<leader>n', '<cmd> lua require("nabla").popup()<CR>', {desc = 'nabla'})

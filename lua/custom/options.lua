@@ -53,7 +53,8 @@ vim.opt.foldenable = true
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
-vim.opt.autochdir = true
+-- changes the directory with each file open
+vim.opt.autochdir = false
 
 vim.opt.wrap = true
 vim.opt.linebreak = true

@@ -182,7 +182,12 @@ return {
 
 {
     -- Reference
-    inner_snip("ref", "\\ref{<>}", "References"),
+    -- inner_snip("ref", "\\ref{<>}", "References"),
+    s(
+	{trig="ref", dscr="Add a reference", wordTrig=true},
+	fmta("\\ref{<>}", { i(1) }),
+	{ condition = in_text}
+    ),
 
     visual_insert("tii", "\\textit{<>}", "Text Italic", in_text),
     visual_insert("tbb", "\\textbf{<>}", "Text Italic", in_text),

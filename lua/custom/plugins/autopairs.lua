@@ -5,9 +5,9 @@ return {
         require('nvim-autopairs').setup({
             disable_filetype = { "tex" },
         })
-    end,
+    end
     -- require('nvim-autopairs').setup({
     --     disable_filetype = { "TelescopePrompt" , "vim" },
     -- })
-    --
+
 }

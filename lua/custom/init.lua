@@ -7,9 +7,9 @@ local s = ls.snippet
 local t = ls.text_node
 
 
-require('nvim-autopairs').setup({
-  -- disable_filetype = { "tex" },
-})
+-- require('nvim-autopairs').setup({
+--   -- disable_filetype = { "tex" },
+-- })
 
 vim.g.vimtex_view_method = 'zathura'
 
