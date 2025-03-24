@@ -1,6 +1,6 @@
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = require("lsp.on_attach")
+local on_attach = require 'lsp.on_attach'
 -- mason-lspconfig requires that these setup functions are called in this order before setting up the servers.
 require('mason').setup()
 require('mason-lspconfig').setup()
@@ -13,8 +13,8 @@ local servers = {
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-  lua_ls = require("lsp.servers.lua_ls"),
-  ltex = require("lsp.servers.ltex")
+  lua_ls = require 'lsp.servers.lua_ls',
+  ltex = require 'lsp.servers.ltex',
 }
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -39,27 +39,42 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require('mason-nvim-lint').setup()
+
 -- Linting and formatting
-require("lint").linters_by_ft = {
+require('lint').linters_by_ft = {
   python = { 'flake8' },
 }
 
-require("formatter").setup({
-  filetype = {
-    -- Formatter configurations for filetype "lua" go here
-    -- and will be executed in order
-    lua = {
-      -- "formatter.filetypes.lua" defines default configurations for the
-      -- "lua" filetype
-      require("formatter.filetypes.lua").stylua,
-    },
+require('mason-conform').setup()
 
-    python = {
-      require("formatter.filetypes.python").black,
-    },
+require('conform').setup {
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    -- Conform will run multiple formatters sequentially
+    python = { 'isort', 'black' },
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { 'rustfmt', lsp_format = 'fallback' },
+    -- Conform will run the first available formatter
+    javascript = { 'prettierd', 'prettier', stop_after_first = true },
+  },
+  -- format_on_save = {
+  --   -- These options will be passed to conform.format()
+  --   timeout_ms = 500,
+  --   lsp_format = 'fallback',
+  -- },
+}
 
-    ["*"] = {
-      require("formatter.filetypes.any").remove_trailing_whitespace,
+vim.api.nvim_create_user_command('Format', function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ['end'] = { args.line2, end_line:len() },
     }
-  }
-})
+  end
+  require('conform').format { async = true, lsp_format = 'fallback', range = range }
+end, { range = true })
+
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

@@ -17,3 +17,4 @@ require('lazydev').setup()
 vim.defer_fn(function()
   require("core.plugins.treesitter")
 end, 0)
+

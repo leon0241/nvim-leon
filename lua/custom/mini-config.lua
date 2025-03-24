@@ -1,0 +1,5 @@
+require('mini.comment').setup()
+require('mini.cursorword').setup()
+require('mini.hipatterns').setup()
+require('mini.icons').setup()
+require('mini.jump').setup()

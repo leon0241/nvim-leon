@@ -13,7 +13,40 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- Pick'n'mix plugins 1
+  {
   'echasnovski/mini.nvim',
+    -- Installed Snippets:
+    -- mini.comment
+    -- mini.cursorword
+    -- mini.icons
+    -- mini.hipatterns
+    -- mini.jump
+  },
+  
+
+  -- Pick'n'mix plugins 2
+  {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      lazygit = {enabled = true},
+      scope = { enabled = true },
+    },
+  },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -26,11 +59,30 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
 
-      -- Mason Linting
-      'mfussenegger/nvim-lint',
+      -- DAP
+      {
+        -- Creates a beautiful debugger UI
+        'rcarriga/nvim-dap-ui',
+        'nvim-neotest/nvim-nio',
 
-      -- Mason Formatting
-      'mhartington/formatter.nvim',
+        -- Installs the debug adapters for you
+        'jay-babu/mason-nvim-dap.nvim',
+
+        -- Add your own debuggers here
+        'leoluz/nvim-dap-go',
+      },
+
+      -- Linting
+      {
+        "mfussenegger/nvim-lint",
+        "rshkarin/mason-nvim-lint",
+      },
+
+      -- Formatting
+      {
+        "stevearc/conform.nvim",
+        "zapling/mason-conform.nvim",
+      },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -190,8 +242,8 @@ require('lazy').setup({
     opts = {},
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- -- "gc" to comment visual regions/lines
+  -- { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -227,6 +279,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
   },
@@ -236,7 +289,6 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
 
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },

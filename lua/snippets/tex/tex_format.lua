@@ -2,6 +2,7 @@ local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
 local t = ls.text_node
+local f = ls.function_node
 local fmta = require('luasnip.extras.fmt').fmta
 
 
@@ -162,22 +163,6 @@ return {
 	    }
 	)
     ),
-    s(
-	{trig="add;enumnsl", dscr="Add an enumerated list with no spacing"},
-	fmta(
-	-- \renewcommand\labelitemi{\tiny$\bullet$}
-	    [[
-	\begin{enumerate}[leftmargin=*]
-	    \setlength\itemsep{0em}
-	    \item <>
-	\end{enumerate}
-	]],
-	    {
-		i(1),
-	    }
-	)
-    ),
-
 },
 
 {
@@ -191,6 +176,28 @@ return {
 
     visual_insert("tii", "\\textit{<>}", "Text Italic", in_text),
     visual_insert("tbb", "\\textbf{<>}", "Text Italic", in_text),
+
+    -- Turn list into list with no left spacing
+    s(
+	{trig="\\begin{(enumerate|itemize)}<", regTrig=true, trigEngine="ecma", dscr="Add an enumerated list with no spacing"},
+	    fmta("\\ref{<>}", { i(1) }),
+	    { condition = in_text}
+	 --    f(function(args, snip) return
+		-- "\\begin{" .. snip.captures[1] .. "}[leftmargin=*]" end, {}
+	 --    )
+    ),
+
+ --    s(
+	-- {trig="([\\%{%}%(%)%w]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
+	-- fmta(
+	--     "\\frac{<>}{<>}",
+	--     {
+	-- 	f( function(_, snip) return snip.captures[1] end ),
+	-- 	i(1)
+	--     }
+	-- ),
+	-- { condition = in_mathzone}
+ --    ),
 
     -- a;l to create a new line on itemized lists?
     s(
