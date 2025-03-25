@@ -8,7 +8,6 @@ local in_mathzone = conditions.in_mathzone
 -- Constructor functions
 local create_alpha = funcs.create_alpha
 
-local snippets = {}
 local autosnippets = {}
 
 local greek_letters = {

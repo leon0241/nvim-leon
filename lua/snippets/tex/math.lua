@@ -35,7 +35,7 @@ local function expansion_capture(trigger, opts)
 	return function(line_to_cursor, trigger)
 		line_to_cursor = apply_common_opts(line_to_cursor, opts)
 
-		
+
 	end
 end
 
@@ -116,47 +116,47 @@ return {}, {
 		{condition = in_mathzone}
 	),
 
-    s(
-	{trig="//", dscr="Fraction", wordTrig=false},
-	fmta(
-	    "\\frac{<>}{<>}",
-	    {i(1), i(2)}
+	s(
+		{trig="//", dscr="Fraction", wordTrig=false},
+		fmta(
+			"\\frac{<>}{<>}",
+			{i(1), i(2)}
+		),
+		{ condition = in_mathzone}
 	),
-	{ condition = in_mathzone}
-    ),
-    s(
+	s(
 		{trig="([[\\%w][%{.*%}][%(.*%)][%w]]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
-	fmta(
-	    "\\frac{<>}{<>}",
-	    {
-		f( function(_, snip) return snip.captures[1] end ),
-		i(1)
-	    }
+		fmta(
+			"\\frac{<>}{<>}",
+			{
+				f( function(_, snip) return snip.captures[1] end ),
+				i(1)
+			}
+		),
+		{ condition = in_mathzone}
 	),
-	{ condition = in_mathzone}
-    ),
 
 
-    s(
-	{trig="(%_%{%d*)%}(%d)", regTrig=true, wordTrig=false, priority=10, dscr="auto-indent variables"},
-	fmta(
-	    "<><>}",
-	    {
-		f( function(_, snip) return snip.captures[1] end),
-		f( function(_, snip) return snip.captures[2] end),
-	    }
+	s(
+		{trig="(%_%{%d*)%}(%d)", regTrig=true, wordTrig=false, priority=10, dscr="auto-indent variables"},
+		fmta(
+			"<><>}",
+			{
+				f( function(_, snip) return snip.captures[1] end),
+				f( function(_, snip) return snip.captures[2] end),
+			}
+		),
+		{ condition = in_mathzone}
 	),
-	{ condition = in_mathzone}
-    ),
-    s(
-	{trig="([%a%)%]%}])(%d)", regTrig=true, wordTrig=false, priority=-1, dscr="auto-indent variables 2"},
-	fmta(
-	    "<>_{<>}",
-	    {
-		f( function(_, snip) return snip.captures[1] end),
-		f( function(_, snip) return snip.captures[2] end),
-	    }
+	s(
+		{trig="([%a%)%]%}])(%d)", regTrig=true, wordTrig=false, priority=-1, dscr="auto-indent variables 2"},
+		fmta(
+			"<>_{<>}",
+			{
+				f( function(_, snip) return snip.captures[1] end),
+				f( function(_, snip) return snip.captures[2] end),
+			}
+		),
+		{ condition = in_mathzone}
 	),
-	{ condition = in_mathzone}
-    ),
 }

@@ -27,6 +27,30 @@ for _, letter in ipairs(mathbb_letters) do
     table.insert(autosnippets, mathbb_snippet(letter))
 end
 
+-- Math Fonts
+local math_fonts = {
+    {"rm", "\\mathrm{<>}", true},
+    {"it", "\\mathit{<>}", false},
+    {"bf", "\\mathbf{<>}", false},
+    {"tt", "\\mathtt{<>}", false},
+    {"mc", "\\mathcal{<>}", true},
+    {"bb", "\\mathbb{<>}", true},
+    {"scr", "\\mathscr{<>}", true}
+}
+
+for _, snip in ipairs(math_fonts) do
+    -- bb -> \mathbb{_}
+    table.insert(autosnippets, visual_insert( snip[1], snip[2], "", in_mathzone
+    ))
+
+    -- If snip true then put a postfixer, output slice off final 5 chars
+    -- abb -> \mathbb{a}
+    if snip[3] == true then
+	table.insert(autosnippets, var_postfixer(snip[1], snip[2]:sub(1, -5), "", in_mathzone, 10
+	))
+    end
+end
+
 -- superscript and subscript mathBBs
 local manual_snippet_list = {
     mbb_super_sub("R", "2", "^"),
@@ -40,28 +64,9 @@ local manual_snippet_list = {
     mbb_super_sub("N", "0", "_"),
     general_super_sub("\\ell", "1", "_"),
 
-    visual_insert("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
-    visual_insert("tt", "\\mathtt{<>}", "Math Typewriter", in_mathzone),
-    visual_insert("it", "\\mathit{<>}", "Math Italic", in_mathzone),
-    visual_insert("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
-    visual_insert("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
-    visual_insert("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
-
- --    inner_snip("add;texstring", "\\texorpdfstring{<>}", "add a package", line_begin),
- --    s(
-	-- {trig = "add;texstring", dscr="Add a Tex or PDF String", prio=0},
-	-- fmts("\\texorpdfstring{<>}{<>}"),
-	-- {
-	--     d(1, conditions.get_visual),
-	--     
-	-- }
- --    )
-
-    
     object("topo", "\\mathcal{T}", "Topology", in_mathzone),
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
-
     inner_snip("text", "\\text{<>}", "text module", in_mathzone),
 
     object(",,", ",\\,", "comma space", in_mathzone),
@@ -69,22 +74,9 @@ local manual_snippet_list = {
     object("qquad", "\\qquad", "qquad", in_mathzone, 5),
     object("vsm", "\\vspace{-5pt}", "qquad"),
 
-
-    -- Math Fonts
-    inner_snip("rm", "\\mathrm{<>}", "Math Roman", in_mathzone),
-    inner_snip("it", "\\mathit{<>}", "Math Italic", in_mathzone),
-    inner_snip("bf", "\\mathbf{<>}", "Math Bold", in_mathzone),
-    inner_snip("tt", "\\mathtt{<>}", "Math Bold", in_mathzone),
-    inner_snip("mc", "\\mathcal{<>}", "MathCal", in_mathzone),
-    inner_snip("bb", "\\mathbb{<>}", "MathBB", in_mathzone),
-    inner_snip("scr", "\\mathscr{<>}", "Mathscript", in_mathzone),
-
+    -- Post fixing this guy
     object("\\mathscr{}i", "scri", "Mathscript", in_mathzone),
 
-    var_postfixer("bb", "\\mathbb", "Postfix Variable to mathbb", in_mathzone, 10),
-var_postfixer("rm", "\\mathrm", "Postfix Variable to mathrm", in_mathzone, 10),
-    var_postfixer("mc", "\\mathcal", "Postfix Variable to mathcal", in_mathzone, 10),
-    var_postfixer("scr", "\\mathscr", "Postfix Variable to mathscript", in_mathzone, 10),
 }
 
 -- Combine automated lists with manual list
@@ -94,7 +86,6 @@ end
 
 -- Regular snippets
 local snippets = {
-
     visual_insert_2("texstring", "\\texorpdfstring{$<>$}{<>}", "Add a Tex or PDF String", in_mathzone),
 }
 

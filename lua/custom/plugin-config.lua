@@ -140,6 +140,17 @@ harpoon:setup()
 local harpoon_extensions = require("harpoon.extensions")
 harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
+
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-Z>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-X>", function() harpoon:list():next() end)
+
+
 -- Treesitter
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()

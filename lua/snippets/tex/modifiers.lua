@@ -16,61 +16,81 @@ local visual_insert_2 = funcs.visual_insert_2
 local var_postfixer = funcs.var_postfixer
 local object = funcs.object
 
-local snippet_list = {}
+-- Autosnippet array
+local autosnippets = {}
 
-local manual_snippet_list = {
 
-    object("sr", "^{2}", "square", in_mathzone),
-    object("cb", "^{3}", "cube", in_mathzone),
-    object("invs", "^{-1}", "inverse", in_mathzone),
+-- Object Snippets
+local mods = {
+    {"vc", "\\vec{<>}"},
+    {"bar", "\\overline{<>}"},
+    {"hat", "\\hat{<>}"},
+    {"udl", "\\underline{<>}"},
+    {"tde", "\\tilde{<>}"},
+}
+
+for _, snip in ipairs(mods) do
+    -- vc -> \vec{_}
+    table.insert(autosnippets, visual_insert( snip[1], snip[2], "", in_mathzone
+    ))
+
+    -- avc -> \vec{a}
+    table.insert(autosnippets, var_postfixer(snip[1], snip[2]:sub(1, -5), "", in_mathzone, 10
+    ))
+end
+
+-- Object Snippets
+local objects = {
+    -- Superscript
+    {"sr", "^{2}", 0},
+    {"cb", "^{3}", 0},
+    {"invs", "^{-1}", 0},
 
     -- x and y abbreviations
-    object("xnn", "x_{n}", "x to the n", in_mathzone),
-    object("ynn", "y_{n}", "y to the n", in_mathzone),
-    object("fxx", "f(x)", "f(x)", in_mathzone, 10),
-    object("gxx", "g(x)", "f(x)", in_mathzone, 10),
-    object("fnn", "f_{n}", "f(n)", in_mathzone, 10),
-    object("fnx", "f_{n}(x)", "f(n)", in_mathzone, 10),
-    object("cfn", "(f_{n})", "f(n)", in_mathzone, 10),
-    object("zxf", "f(x_{0})", "f(x_0)", in_mathzone, 10), -- not consistent but rolls off the hand easier
-    object("fyy", "f(y)", "f(y)", in_mathzone, 10),
-
-    -- set theory notation
-    object("fAe", "\\forall\\epsilon", "for all epsilon", in_mathzone),
-    object("tEd", "\\exists\\delta", "there exists a delta", in_mathzone),
-    object("fAx", "\\forall x", "for all x", in_mathzone),
+    {"xnn", "x_{n}", 0},
+    {"ynn", "y_{n}", 0},
+    {"fxx", "f(x)", 10},
+    {"gxx", "g(x)", 10},
+    {"fnn", "f_{n}", 10},
+    {"fnx", "f_{n}(x)", 10},
+    {"cfn", "(f_{n})", 10},
+    {"zxf", "f(x_{0})", 10}, -- not consistent but rolls off the hand easier
+    {"fyy", "f(y)", 10},
 
     -- open balls
-    object("BX", "B_{X}", "Open ball X", in_mathzone, 10),
-    object("BY", "B_{Y}", "Open ball Y", in_mathzone, 10),
+    {"BX", "B_{X}", 10},
+    {"BY", "B_{Y}", 10},
 
+    -- Vectors
+    {"vvc", "\\vec{v}", 10},
+    {"0vc", "\\vec{0}", 10},
+}
 
-    inner_snip("rd", "^{<>}", "Custom superscript", in_mathzone),
-    inner_snip("_", "_{<>}", "Custom subscript", in_mathzone),
-    inner_snip("sq", "\\sqrt{<>}", "Custom power", in_mathzone),
+for _, snip in ipairs(objects) do
+    table.insert(autosnippets, object(
+	snip[1], snip[2], "", in_mathzone, snip[3])
+    )
+end
 
-    visual_insert("vc", "\\vec{<>}", "vector", in_mathzone),
-    visual_insert("bar", "\\overline{<>}", "vector", in_mathzone),
-    visual_insert("hat", "\\hat{<>}", "vector", in_mathzone),
-    visual_insert("udl", "\\underline{<>}", "vector", in_mathzone),
-    visual_insert("tde", "\\tilde{<>}", "vector", in_mathzone),
+-- Snippets that end inside the completion
+local inners = {
+    {"rd", "^{<>}"},
+    {"_", "_{<>}"},
+    {"sq", "\\sqrt{<>}"},
+    {"_{tx", "_{\\text{<>}"},
+    {"^{tx", "^{\\text{<>}"},
+}
 
+for _, snip in ipairs(inners) do
+    table.insert(autosnippets, inner_snip(
+	snip[1], snip[2], "", in_mathzone)
+    )
+end
 
-    var_postfixer("vc", "\\vec", "Postfix Variable to vector", in_mathzone, 10),
-    var_postfixer("bar", "\\overline", "Postfix Variable to overbar", in_mathzone, 10),
-    var_postfixer("hat", "\\hat", "Postfix Variable to hat", in_mathzone, 10),
-    var_postfixer("udl", "\\underline", "Postfix Variable to underline", in_mathzone, 10),
-    var_postfixer("tde", "\\tilde", "Postfix Variable to tilde", in_mathzone, 10),
-
-
-    object("vvc", "\\vec{v}", "v vector", in_mathzone, 10),
-    object("0vc", "\\vec{0}", "v vector", in_mathzone, 10),
-
+local manual_snippet_list = {
+    -- Visual Insert Overbrace and Underbrace
     visual_insert_2("ubr", "\\underbrace{<>}_{<>}", "underbrace", in_mathzone),
     visual_insert_2("obr", "\\overbrace{<>}_{<>}", "underbrace", in_mathzone),
-
-    inner_snip("_{tx", "_{\\text{<>}", "add text to subscripts", in_mathzone),
-    inner_snip("^{tx", "^{\\text{<>}", "add text to superscripts", in_mathzone),
 
     s(
 	{trig="tb", dscr="Top and bottom variable", wordTrig=false},
@@ -100,7 +120,6 @@ local manual_snippet_list = {
 	{ condition = in_mathzone}
     ),
 
-
     s(
 	{trig="(%_%{%d*)%}(%d)", regTrig=true, wordTrig=false, priority=10, dscr="auto-indent variables"},
 	fmta(
@@ -127,7 +146,7 @@ local manual_snippet_list = {
 
 -- Combine automated lists with manual list
 for _, snippet in ipairs(manual_snippet_list) do
-    table.insert(snippet_list, snippet)
+    table.insert(autosnippets, snippet)
 end
 
-return {}, snippet_list
+return {}, autosnippets

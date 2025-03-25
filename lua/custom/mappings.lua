@@ -96,13 +96,4 @@ vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { des
 
 
 
-vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
-
-vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-Z>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-X>", function() harpoon:list():next() end)
 
