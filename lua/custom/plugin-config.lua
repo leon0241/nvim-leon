@@ -121,6 +121,8 @@ require('nvim-autopairs').setup({
   disable_filetype = { "tex" },
 })
 
+-- Git signs
+require('custom.plugins.marks')
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                Code and file Navigation                 │
