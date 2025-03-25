@@ -88,5 +88,21 @@ vim.keymap.set(
 )
 -- LazyGit
 vim.keymap.set('n', '<Leader>lg', function() Snacks.lazygit.open() end, { desc = 'Enter LazyGit' })
+vim.keymap.set('n', '<Leader>lf', function() Snacks.lazygit.log() end, { desc = 'Enter LazyGit Log' })
+vim.keymap.set('n', '<Leader>lo', function() Snacks.lazygit.log_file() end, { desc = 'Enter LazyGit Log on Current File' })
 
 vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { desc = 'nabla' })
+
+
+
+
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
+
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-Z>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-X>", function() harpoon:list():next() end)
+
