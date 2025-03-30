@@ -28,7 +28,7 @@ vim.keymap.set('v', 'L', '$h', { desc = 'End of Line' })
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line' })
 
 -- God paste
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dhp', { desc = 'Start of Line' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dhp', { desc = 'God Paste' })
 
 -- Center up and down page
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Down one screen and center' })
@@ -74,15 +74,11 @@ vim.keymap.set(
   "<Esc><cmd> exec '.!inkscape-figures create \"'.getline('.').'\" \"'.b:vimtex.root.'/figures/\"'<CR><CR>:w<CR>'",
   { noremap = true }
 )
--- LazyGit
-vim.keymap.set('n', '<Leader>lg', function() Snacks.lazygit.open() end, { desc = 'Enter LazyGit' })
-vim.keymap.set('n', '<Leader>lf', function() Snacks.lazygit.log() end, { desc = 'Enter LazyGit Log' })
-vim.keymap.set('n', '<Leader>lo', function() Snacks.lazygit.log_file() end, { desc = 'Enter LazyGit Log on Current File' })
 
-vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { desc = 'nabla' })
-
-vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
--- Buffers
+-- vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { desc = 'nabla' })
+--
+-- vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
+-- -- Buffers
 
 
 -- Zotero
@@ -98,16 +94,25 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>?', function() Snacks.picker.recent() end, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', function() Snacks.picker.buffers() end, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>gf', function() Snacks.picker.git_files() end, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', function() Snacks.picker.files() end, { desc = '[S]earch [F]iles' })
+-- Lazy
+vim.keymap.set('n', '<Leader>lg', function() Snacks.lazygit.open() end, { desc = '[L]azy [G]it' })
+vim.keymap.set('n', '<Leader>lo', function() Snacks.lazygit.log() end, { desc = '[L]azyGit L[o]g' })
+vim.keymap.set('n', '<Leader>lc', function() Snacks.lazygit.log_file() end, { desc = '[L]azyGit Log on [C]urrent File' })
+
+-- Live Grep
 vim.keymap.set('n', '<leader>sG', function() Snacks.picker.git_grep() end, { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>s/', function() Snacks.picker.grep_buffers() end, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', function() Snacks.picker.grep_word() end, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sl', function() Snacks.picker.lines() end, { desc = '[S]earch by [L]ines' })
+
+-- Files
+vim.keymap.set('n', '<leader><space>', function() Snacks.picker.buffers() end, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>ff', function() Snacks.picker.files() end, { desc = '[F]ind [F]ile' })
+vim.keymap.set('n', '<leader>fg', function() Snacks.picker.git_files() end, { desc = '[F]ind [G]it file' })
+vim.keymap.set('n', '<leader>?', function() Snacks.picker.recent() end, { desc = '[?] Find recently opened files' })
+
+-- Other
+vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sd', function() Snacks.picker.diagnostics() end, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', function() Snacks.picker.resume() end, { desc = '[S]earch [R]esume' })
-
--- vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })

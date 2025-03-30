@@ -85,20 +85,32 @@ require('lualine').setup({
 require('which-key').add {
     { "<leader>c", group = "[C]ode" },
     { "<leader>c_", hidden = true },
+
     { "<leader>d", group = "[D]ocument" },
     { "<leader>d_", hidden = true },
-    { "<leader>g", group = "[G]it" },
-    { "<leader>g_", hidden = true },
+
+    { "<leader>l", group = "[L]azygit" },
+    { "<leader>l_", hidden = true },
+
     { "<leader>h", group = "Git [H]unk" },
     { "<leader>h_", hidden = true },
+
     { "<leader>r", group = "[R]ename" },
     { "<leader>r_", hidden = true },
-    { "<leader>s", group = "[S]earch" },
+
+    { "<leader>s", group = "[S]earch in Files" },
     { "<leader>s_", hidden = true },
+
+    { "<leader>f", group = "[F]ind Files" },
+    { "<leader>f_", hidden = true },
+
     { "<leader>t", group = "[T]oggle" },
     { "<leader>t_", hidden = true },
+
     { "<leader>w", group = "[W]orkspace" },
     { "<leader>w_", hidden = true },
+
+    { "<leader>zf", group = "[Z]otero Citation" },
 }
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
@@ -159,6 +171,7 @@ vim.defer_fn(function()
   require("core.plugins.treesitter")
 end, 0)
 
+require("core.plugins.telescope")
 
 -- ╭─────────────────────────────────────────────────────────╮
 -- │                    LSP Configuration                    │
