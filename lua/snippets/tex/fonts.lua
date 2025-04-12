@@ -7,6 +7,10 @@ local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
 local in_text = conditions.in_text
 local f = require("luasnip").function_node
+local s = require("luasnip").snippet
+local fmta = require('luasnip.extras.fmt').fmta
+local i = require('luasnip').insert_node
+local rep = require("luasnip.extras").rep
 
 -- Constructor functions
 local inner_snip = funcs.inner_snip
@@ -68,14 +72,24 @@ local manual_snippet_list = {
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
     inner_snip("text", "\\text{<>}", "text module", in_mathzone),
+    inner_snip("label", "\\label{<>}", "label module", in_mathzone),
+    s({trig = "labtag"},
+	fmta( "\\label{<>}\\tag{<>}", { i(1, "name"), rep(1) })
+    ),
 
     object(",,", ",\\,", "comma space", in_mathzone),
+    object(",.,", ",\\dots,", "comma space", in_mathzone),
+    object("..", ",\\dots,", "comma space", in_mathzone),
+    object("c..", ",\\cdots,", "comma space", in_mathzone),
+    object("v..", ",\\vdots,", "comma space", in_mathzone),
     object("quad", "\\quad", "quad", in_mathzone),
     object("qquad", "\\qquad", "qquad", in_mathzone, 5),
     object("vsm", "\\vspace{-5pt}", "qquad"),
 
     -- Post fixing this guy
     object("\\mathscr{}i", "scri", "Mathscript", in_mathzone),
+    -- Post fixing this guy
+    object("\\\\inte", "\\inte", "Interrupt fix", in_mathzone),
 
 }
 

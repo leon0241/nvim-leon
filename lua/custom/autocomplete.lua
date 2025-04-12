@@ -6,27 +6,23 @@ require("luasnip.loaders.from_lua").load({
   paths = {"~/.config/nvim/lua/snippets"}
 })
 
-require("luasnip").config.set_config({
-  store_selection_keys = "<Tab>",
-})
-
 ls.setup({
   enable_autosnippets = true,
   store_selection_keys = "<Tab>",
-  -- ext_opts = {
-  --   active = {
-  --     hl_group = "red"
-  --   },
-  --   passive = {
-  --     hl_group = "green"
-  --   },
-  --   visited = {
-  --     hl_group = "yellow"
-  --   },
-  --   unvisited = {
-  --     hl_group = "blue"
-  --   }
-  -- }
+  ext_opts = {
+    active = {
+      hl_group = "red"
+    },
+    passive = {
+      hl_group = "green"
+    },
+    visited = {
+      hl_group = "yellow"
+    },
+    unvisited = {
+      hl_group = "blue"
+    }
+  }
 })
 
 -- Autocompletion

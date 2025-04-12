@@ -57,7 +57,6 @@ return {
     object("add;bar", "\\longrule{0.08ex}", "Add a horizontal bar"),
     inner_snip("add;tbar", "\\textrule{<>}", "Add a horizontal bar with text label"),
 
-
     -- Individual snippets
     s(
 	{trig="add;img", dscr="Add an Image"},
@@ -171,6 +170,11 @@ return {
     s(
 	{trig="ref", dscr="Add a reference", wordTrig=true},
 	fmta("\\ref{<>}", { i(1) }),
+	{ condition = in_text}
+    ),
+    s(
+	{trig="cref", dscr="Add a reference", wordTrig=true},
+	fmta("\\cref{<>}", { i(1) }),
 	{ condition = in_text}
     ),
 

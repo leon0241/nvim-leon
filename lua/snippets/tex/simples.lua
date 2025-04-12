@@ -80,6 +80,8 @@ local objects = {
     {"ell", "\\ell"},
     {"e\\mpt", "\\emptyset"},
     {"\\\\\\", "\\backslash"},
+    {"\\mathrm{e}i", "ermi"},
+
 
 
     -- Random operators

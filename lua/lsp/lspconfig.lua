@@ -13,6 +13,7 @@ local servers = {
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+  basedpyright = require 'lsp.servers.basedpyright',
   lua_ls = require 'lsp.servers.lua_ls',
   ltex = require 'lsp.servers.ltex',
 }

@@ -81,6 +81,7 @@ return {
     env_snip("add;align", "align*", "add an align environment", line_begin),
     env_snip("add;nalign", "align", "add a numbered align environment", line_begin),
     env_snip("add;proof", "proof", "add a proof environment", line_begin),
+    env_snip("add;eq", "equation", "add an equation environment", line_begin),
 
     s(
 	{trig = "add;prooftree", dscr = "Add a proof tree"},

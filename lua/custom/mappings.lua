@@ -28,7 +28,7 @@ vim.keymap.set('v', 'L', '$h', { desc = 'End of Line' })
 vim.keymap.set('v', 'H', '^', { desc = 'Start of Line' })
 
 -- God paste
-vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dhp', { desc = 'God Paste' })
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = 'God Paste' })
 
 -- Center up and down page
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Down one screen and center' })
@@ -77,7 +77,7 @@ vim.keymap.set(
 
 -- vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { desc = 'nabla' })
 --
--- vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
+vim.keymap.set('n', '<Leader>L', '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>')
 -- -- Buffers
 
 
@@ -116,3 +116,28 @@ vim.keymap.set('n', '<leader>?', function() Snacks.picker.recent() end, { desc =
 vim.keymap.set('n', '<leader>sh', function() Snacks.picker.help() end, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sd', function() Snacks.picker.diagnostics() end, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', function() Snacks.picker.resume() end, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sn', function() Snacks.picker.notifications() end, { desc = '[S]earch [N]otifications' })
+
+
+
+local dap = require 'dap'
+local dapui = require 'dapui'
+
+-- Basic debugging keymaps, feel free to change to your liking!
+vim.keymap.set('n', '<F5>', function() dap.continue() end, { desc = 'Debug: Start/Continue' })
+vim.keymap.set('n', '<F1>', function() dap.step_into() end, { desc = 'Debug: Step Into' })
+vim.keymap.set('n', '<F2>', function() dap.step_over() end, { desc = 'Debug: Step Over' })
+vim.keymap.set('n', '<F3>', function() dap.step_out() end, { desc = 'Debug: Step Out' })
+vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+vim.keymap.set('n', '<leader>B', function()
+  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+end, { desc = 'Debug: Set Breakpoint' })
+
+-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+vim.keymap.set('n', '<leader>dt', function() dapui.toggle() end, { desc = 'Toggle DAP UI' })
+
+
+
+-- Trouble
+vim.keymap.set('n', '<leader>xx', "<cmd>Trouble diagnostics toggle<cr>", { desc = 'Diagnostics (Trouble)' })
+vim.keymap.set('n', '<leader>xX', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = 'Buffer Diagnostics (Trouble).' })
