@@ -53,12 +53,16 @@ local objects = {
     {"tEd", "\\exists\\delta"},
     {"fAx", "\\forall x"},
 
+    -- Topology
+    {"Ull", "U_{\\lambda}"},
+    {"linla", "\\lambda\\in\\Lambda"},
+    {"xinx", "x\\in X"},
+    {"ninn", "n\\in\\mathbb{N}"},
 
     -- Separators
     {"para", "\\parallel"},
     {"|\\", "\\setminus"},
     {"||", "\\mid"},
-
 
     -- uhh logic and cap cup things
     {"cap", "\\cap"},
@@ -80,7 +84,11 @@ local objects = {
     {"ell", "\\ell"},
     {"e\\mpt", "\\emptyset"},
     {"\\\\\\", "\\backslash"},
+    {"to\\pint", "A^{\\circ}"},
+
+    -- Postfixes
     {"\\mathrm{e}i", "ermi"},
+    {"\\ref{e}", "refe"},
 
 
 
@@ -121,6 +129,14 @@ local manual_snips = {
     -- Phrases
     object("F-module", "$F$-module", ""),
     object("R-module", "$R$-module", ""),
+
+    -- Topology
+    object("topo", "\\mathcal{T}", "Topology", in_mathzone),
+    object("xtopo", "(X, \\mathcal{T})", "Topological Space", in_mathzone, 5),
+    object("ytopo", "(Y, \\mathcal{U})", "Topological Space", in_mathzone, 5),
+    object("xdmet", "(X, d)", "Metric Space", in_mathzone),
+
+
 }
 
 local autosnips = {}

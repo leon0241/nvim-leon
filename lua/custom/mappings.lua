@@ -34,6 +34,13 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = 'God Paste' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Down one screen and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Up one screen and center' })
 
+
+
+vim.keymap.set('n', '<C-w><C-l>', '<C-w>v<C-w>l', { desc = 'Split to the right' })
+vim.keymap.set('n', '<C-w><C-h>', '<C-w>v', { desc = 'Split to the left' })
+vim.keymap.set('n', '<C-w><C-j>', '<C-w>s<C-w>j', { desc = 'Split down' })
+vim.keymap.set('n', '<C-w><C-k>', '<C-w>s', { desc = 'Split up' })
+
 -- Hacky solution to get upper case hjkl in select mode
 vim.keymap.set('s', 'H', 'h<Esc>~i', { desc = 'Upper case H' })
 vim.keymap.set('s', 'h', 'h<Esc>i', { desc = 'lowercase H' })

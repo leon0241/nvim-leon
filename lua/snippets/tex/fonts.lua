@@ -68,7 +68,6 @@ local manual_snippet_list = {
     mbb_super_sub("N", "0", "_"),
     general_super_sub("\\ell", "1", "_"),
 
-    object("topo", "\\mathcal{T}", "Topology", in_mathzone),
 
     object("dss", "\\displaystyle", "displaystyle", in_mathzone),
     inner_snip("text", "\\text{<>}", "text module", in_mathzone),
@@ -78,10 +77,11 @@ local manual_snippet_list = {
     ),
 
     object(",,", ",\\,", "comma space", in_mathzone),
+    object(";;", ",\\;\\quad", "comma semi", in_mathzone),
     object(",.,", ",\\dots,", "comma space", in_mathzone),
-    object("..", ",\\dots,", "comma space", in_mathzone),
-    object("c..", ",\\cdots,", "comma space", in_mathzone),
-    object("v..", ",\\vdots,", "comma space", in_mathzone),
+    object("..", "\\dots", "dots", in_mathzone),
+    object("c..", "\\cdots", "centered dots", in_mathzone, 5),
+    object("v..", "\\vdots", "vertical dots", in_mathzone, 5),
     object("quad", "\\quad", "quad", in_mathzone),
     object("qquad", "\\qquad", "qquad", in_mathzone, 5),
     object("vsm", "\\vspace{-5pt}", "qquad"),

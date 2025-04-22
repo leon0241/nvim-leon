@@ -13,14 +13,26 @@ local h = require('snippet-helpers.helpers')
 local line_begin = conditions.line_begin
 local in_mathzone = conditions.in_mathzone
 
+local inner_snip = funcs.inner_snip
+local in_list = conditions.in_list
+local in_env = conditions.in_env
+local in_align = conditions.in_align
+local in_mat = conditions.in_mat
+
 local env_snip = funcs.env_snip
 
 
--- Determines what kind of command to suffix at the end of a new line in an environment using j;
+-- 
+
+--- Determines what to suffix for a newline call in environments
+--- @param args any
+--- @param parent any
+--- @param user_args any
+--- @return string
 local function env_autoend(args, parent, user_args)
     local envname = vim.fn['vimtex#env#get_inner']()["name"]
 
-    local newlines = { "align", "align*" }
+    local newlines = { "align", "align*" , "cases"}
 
     if h.is_in(newlines, envname) or envname:sub(-6) == "matrix" then
     	return "\\\\"
@@ -29,51 +41,23 @@ local function env_autoend(args, parent, user_args)
     end
 end
 
--- Determines what kind of command to prefix at the start of a new line in an environment using j;
+---Determines what kind of command to prefix at the start of a new line in an environment using j;
+---@param args any
+---@param parent any
+---@param user_args any
+---@return string
 local function env_autostart(args, parent, user_args)
     local envname = vim.fn['vimtex#env#get_inner']()["name"]
 
-    local nl_math_envs = { "itemize", "enumerate"}
+    local nl_math_envs = { "itemize", "enumera"}
+    print(vim.inspect(envname))
 
-    if h.is_in(nl_math_envs, envname) then
+    if h.is_in(nl_math_envs, envname:sub(1,7)) then
     	return "\\item "
     else
 	return ""
     end
 end
-
-
--- local function table_auto(args, parent, user_args)
---     
---     return '[' .. args[1][1] .. user_args .. ']'
--- end
-
--- s("trig", {
---   i(1), t '<-i(1) ',
---   f(fn,  -- callback (args, parent, user_args) -> string
---     {2}, -- node indice(s) whose text is passed to fn, i.e. i(2)
---     { user_args = { "user_args_value" }} -- opts
---   ),
---   t ' i(2)->', i(2), t '<-i(2) i(0)->', i(0)
--- })
---
---     s(
--- 	{trig = "add;table", dscr = "Add a table"},
--- 	fmta(
--- 	    [[
--- 	\begin{tabular}{ |<>| }
--- 	    <>
--- 	\end{tabular}
--- 	]],
--- 	    {
--- 		i(1, "", {key="table_cols"}),
--- 		f(table_auto, {k("table_cols")}
---
--- 	    )
--- 	    }
--- 	)
---     ),
---
 
 
 return {
@@ -156,21 +140,169 @@ return {
 	)
     ),
 
+    -- Individual snippets
+    s(
+	{trig="add;img", dscr="Add an Image"},
+	fmta(
+	    [[
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=\linewidth]{<>}
+	    \caption{<>}
+	\end{figure}
+	]],
+	    { i(1), i(2)}
+	)
+    ),
+    s(
+	{trig="add;fig", dscr="Add a Figure"},
+	fmta(
+	    [[
+	\begin{figure}[h!]
+	    \centering
+	    <>
+	    \caption{<>}
+	    \label{<>}
+	\end{figure}
+	]],
+	    {
+		i(1, "figure"),
+		i(2, "Caption"),
+		i(3, "Label"),
+	    }
+	)
+    ),
+    s(
+	{trig="add;item", dscr="add an itemized list"},
+	fmta(
+	    [[
+	\begin{itemize}
+	    \item <>
+	\end{itemize}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;itemt", dscr="add an itemized list with no spacing"},
+	fmta(
+	-- \renewcommand\labelitemi{\tiny$\bullet$}
+	    [[
+	\begin{itemize-tight}
+	    \item <>
+	\end{itemize-tight}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;itemz", dscr="add an itemized list"},
+	fmta(
+	    [[
+	\begin{itemize-zero}
+	    \item <>
+	\end{itemize-zero}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;enum", dscr="Add an enumerated list"},
+	fmta(
+	    [[
+	\begin{enumerate}
+	    \item <>
+	\end{enumerate}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;enumt", dscr="Add an enumerated list with no spacing"},
+	fmta(
+	    [[
+	\begin{enumerate-tight}
+	    \item <>
+	\end{enumerate-tight}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;enumz", dscr="Add an enumerated list left aligned"},
+	fmta(
+	    [[
+	\begin{enumerate-zero}
+	    \item <>
+	\end{enumerate-zero}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;enumaz", dscr="Add an enumerated list left aligned"},
+	fmta(
+	    [[
+	\begin{enumerate-a-zero}
+	    \item <>
+	\end{enumerate-a-zero}
+	]],
+	    {i(1)}
+	)
+    ),
+    s(
+	{trig="add;enumat", dscr="Add an enumerated list left aligned"},
+	fmta(
+	    [[
+	\begin{enumerate-a-tight}
+	    \item <>
+	\end{enumerate-a-tight}
+	]],
+	    {i(1)}
+	)
+    ),
+
 
 }, {
     s(
-	{trig = "j;", wordTrig=false},
+	{trig = "jO", wordTrig=false},
 	fmta(
 	    [[
 	<>
 	<><>
 	]],
 	    {
-		f(env_autoend, {}, {user_args = {"test"}}),
-		f(env_autostart, {}, {user_args = {"test"}}),
+		f(env_autoend, {}, {}),
+		f(env_autostart, {}, {}),
 		i(0)
 	    }
 	)
+    ),
+    -- a;l to create a new line on itemized lists?
+    s(
+	{trig="jm", wordTrig=false},
+	fmta(
+	    [[
+
+
+	\item $<>$
+	]], {i(1)}
+	),
+	{ condition = in_list }
+    ),
+    inner_snip("\\item ;", "\\item[\\textbf{<>})]", "Custom Item", in_text),
+
+    s(
+	{trig="j[", wordTrig=false},
+	fmta("&", {}
+	),
+	{ condition = in_align }
+    ),
+    s(
+	{trig="j[", wordTrig=false},
+	fmta("& ", {}
+	),
+	{ condition = in_mat }
     ),
 
 

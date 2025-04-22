@@ -1,7 +1,7 @@
 require('mini.comment').setup()
 require('mini.cursorword').setup()
 require('mini.icons').setup()
-require('mini.jump').setup()
+-- require('mini.jump').setup()
 -- require('mini.surround').setup()
 
 -- Custom Highlighting of TODOs and comments
