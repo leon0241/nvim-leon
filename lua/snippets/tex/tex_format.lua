@@ -10,12 +10,7 @@ local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
 
 local line_begin = conditions.line_begin
-local in_list = conditions.in_list
 local in_text = conditions.in_text
-local in_env = conditions.in_env
-local in_align = conditions.in_align
-local in_mat = conditions.in_mat
-
 
 local inner_snip = funcs.inner_snip
 local visual_insert = funcs.visual_insert
@@ -36,7 +31,7 @@ return {
     thmbox("add;crl", "crl", "Add a Corollary" ),
     thmbox("add;rcl", "rcl", "Add a Recall" ),
     thmbox("add;ppn", "ppn", "Add a Proposition" ),
-    
+
 
     -- Single line named expressions
     inner_snip("add;sc", "\\section{<>}", "add a section", line_begin),
@@ -75,27 +70,4 @@ return {
 
     visual_insert("tii", "\\textit{<>}", "Text Italic", in_text),
     visual_insert("tbb", "\\textbf{<>}", "Text Italic", in_text),
-
-    -- Turn list into list with no left spacing
-    s(
-	{trig="\\begin{(enumerate|itemize)}<", regTrig=true, trigEngine="ecma", dscr="Add an enumerated list with no spacing"},
-	    fmta("\\ref{<>}", { i(1) }),
-	    { condition = in_text}
-	 --    f(function(args, snip) return
-		-- "\\begin{" .. snip.captures[1] .. "}[leftmargin=*]" end, {}
-	 --    )
-    ),
-
- --    s(
-	-- {trig="([\\%{%}%(%)%w]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
-	-- fmta(
-	--     "\\frac{<>}{<>}",
-	--     {
-	-- 	f( function(_, snip) return snip.captures[1] end ),
-	-- 	i(1)
-	--     }
-	-- ),
-	-- { condition = in_mathzone}
- --    ),
-
 }

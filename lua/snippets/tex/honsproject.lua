@@ -7,13 +7,6 @@ local fmta = require('luasnip.extras.fmt').fmta
 
 local conditions = require('snippet-helpers.luasnip-conditions')
 local funcs = require('snippet-helpers.luasnip-constructors')
-local postfix = require('luasnip.extras.postfix').postfix
-
-local line_begin = conditions.line_begin
-local in_mathzone = conditions.in_mathzone
-
-local object = funcs.object
-local var_postfixer = funcs.var_postfixer
 local inner_snip = funcs.inner_snip
 
 

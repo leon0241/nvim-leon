@@ -45,25 +45,6 @@ local objects = {
     {"sr", "^{2}", 0},
     {"cb", "^{3}", 0},
     {"invs", "^{-1}", 0},
-
-    -- x and y abbreviations
-    {"xnn", "x_{n}", 0},
-    {"ynn", "y_{n}", 0},
-    {"fxx", "f(x)", 10},
-    {"gxx", "g(x)", 10},
-    {"fnn", "f_{n}", 10},
-    {"fnx", "f_{n}(x)", 10},
-    {"cfn", "(f_{n})", 10},
-    {"zxf", "f(x_{0})", 10}, -- not consistent but rolls off the hand easier
-    {"fyy", "f(y)", 10},
-
-    -- open balls
-    {"BX", "B_{X}", 10},
-    {"BY", "B_{Y}", 10},
-
-    -- Vectors
-    {"vvc", "\\vec{v}", 10},
-    {"0vc", "\\vec{0}", 10},
 }
 
 for _, snip in ipairs(objects) do
@@ -141,6 +122,13 @@ local manual_snippet_list = {
 	    }
 	),
 	{ condition = in_mathzone}
+    ),
+
+    -- Right arrow modify
+    s(
+	{trig="\\to>", dscr="rightarrow with text under/above"},
+	fmta("\\prightarrow{<>}", { i(1)}),
+	{condition = in_mathzone}
     ),
 }
 

@@ -18,107 +18,118 @@ local inner_snip = funcs.inner_snip
 
 
 local objects = {
-    {"!=", "\\ne"},
-    {">=", "\\ge"},
-    {"<=", "\\le"},
-    {"===", "\\equiv"},
-    {">>", "\\gg"},
-    {"<<", "\\ll"},
-    {"~~", "\\sim"},
-    {"\\sim~", "\\approx"},
-    {"~=", "\\simeq"},
-    {"prop", "\\propto"},
-    {"ideal", "\\unlhd"},
+    {"!=", "\\ne", 0},
+    {">=", "\\ge", 0},
+    {"<=", "\\le", 0},
+    {"===", "\\equiv", 0},
+    {">>", "\\gg", 0},
+    {"<<", "\\ll", 0},
+    {"~~", "\\sim", 0},
+    {"\\sim~", "\\approx", 0},
+    {"~=", "\\simeq", 0},
+    {"prop", "\\propto", 0},
+    {"ideal", "\\unlhd", 0},
 
     -- Arrows
-    {"<->", "\\leftrightarrow "},
-    {"->", "\\to"},
-    {"!>", "\\mapsto"},
-    {"=>", "\\implies"},
-    {"=<", "\\impliedby"},
-    {"|=", "\\models"},
-    {"iff", "\\iff"},
+    {"<->", "\\leftrightarrow ", 0},
+    {"->", "\\to", 0},
+    {"!>", "\\mapsto", 0},
+    {"=>", "\\implies", 0},
+    {"=<", "\\impliedby", 0},
+    {"|=", "\\models", 0},
+    {"iff", "\\iff", 0},
 
     -- Set Theory
-    {"Exts", "\\exists"},
-    {"nExts", "\\nexists"},
-    {"fAll", "\\forall"},
-    {"sst", "\\subset"},
-    {"spt", "\\supset"},
-    {"inn", "\\in"},
-    {"\\subsetq", "\\subseteq"},
-    {"\\subseteqq", "\\sqsubseteq"},
-    {"ntri", "\\lhd"},
-    {"fAe", "\\forall\\epsilon"},
-    {"tEd", "\\exists\\delta"},
-    {"fAx", "\\forall x"},
+    {"Exts", "\\exists", 0},
+    {"nExts", "\\nexists", 0},
+    {"fAll", "\\forall", 0},
+    {"sst", "\\subset", 0},
+    {"spt", "\\supset", 0},
+    {"inn", "\\in", 0},
+    {"\\subsetq", "\\subseteq", 0},
+    {"\\subseteqq", "\\sqsubseteq", 0},
+    {"ntri", "\\lhd", 0},
+    {"fAe", "\\forall\\epsilon", 0},
+    {"tEd", "\\exists\\delta", 0},
+    {"fAx", "\\forall x", 0},
 
     -- Topology
-    {"Ull", "U_{\\lambda}"},
-    {"linla", "\\lambda\\in\\Lambda"},
-    {"xinx", "x\\in X"},
-    {"ninn", "n\\in\\mathbb{N}"},
+    {"Ull", "U_{\\lambda, 0}"},
+    {"linla", "\\lambda\\in\\Lambda", 0},
+    {"xinx", "x\\in X", 0},
+    {"ninn", "n\\in\\mathbb{N, 0}"},
 
     -- Separators
-    {"para", "\\parallel"},
-    {"|\\", "\\setminus"},
-    {"||", "\\mid"},
+    {"para", "\\parallel", 0},
+    {"|\\", "\\setminus", 0},
+    {"||", "\\mid", 0},
 
     -- uhh logic and cap cup things
-    {"cap", "\\cap"},
-    {"\\capq", "\\sqcap"},
-    {"cup", "\\cup"},
-    {"\\cupq", "\\sqcup"},
-    {"VV", "\\vee"},
-    {"NN", "\\wedge"},
+    {"cap", "\\cap", 0},
+    {"\\capq", "\\sqcap", 0},
+    {"cup", "\\cup", 0},
+    {"\\cupq", "\\sqcup", 0},
+    {"VV", "\\vee", 0},
+    {"NN", "\\wedge", 0},
 
     -- Random symbols
-    {"prod", "\\prod"},
-    {"log", "\\log"},
-    {"mp", "\\mp"},
-    {"Sq", "\\square"},
-    {"nabl", "\\nabla"},
-    {"del", "\\nabla"},
-    {"xx", "\\times"},
-    {"**", "\\cdot"},
-    {"ell", "\\ell"},
-    {"e\\mpt", "\\emptyset"},
-    {"\\\\\\", "\\backslash"},
-    {"to\\pint", "A^{\\circ}"},
+    {"prod", "\\prod", 0},
+    {"log", "\\log", 0},
+    {"mp", "\\mp", 0},
+    {"Sq", "\\square", 0},
+    {"nabl", "\\nabla", 0},
+    {"del", "\\nabla", 0},
+    {"xx", "\\times", 0},
+    {"**", "\\cdot", 0},
+    {"ell", "\\ell", 0},
+    {"e\\mpt", "\\emptyset", 0},
+    {"\\\\\\", "\\backslash", 0},
+    {"to\\pint", "A^{\\circ, 0}"},
+    {"infty", "\\infty", 0},
 
     -- Postfixes
-    {"\\mathrm{e}i", "ermi"},
-    {"\\ref{e}", "refe"},
+    {"\\mathrm{e, 0}i", "ermi", 0},
+    {"\\ref{e, 0}", "refe", 0},
 
 
 
     -- Random operators
-    {"pi", "\\pi"},
-    {"det", "\\det"},
-    {"sgn", "\\sgn"},
-    {"Mat", "\\Mat"},
-    {"cos", "\\cos"},
-    {"sin", "\\sin"},
-    {"tan", "\\tan"},
+    {"pi", "\\pi", 0},
+    {"det", "\\det", 0},
+    {"sgn", "\\sgn", 0},
+    {"Mat", "\\Mat", 0},
+    {"cos", "\\cos", 0},
+    {"sin", "\\sin", 0},
+    {"tan", "\\tan", 0},
+
+
+    -- Topology
+    {"topo", "\\mathcal{T}", 0},
+    {"xtopo", "(X, \\mathcal{T})", 5},
+    {"ytopo", "(Y, \\mathcal{U})", 5},
+    {"xmet", "(X, d)", 0},
+
+    -- x and y abbreviations
+    {"xnn", "x_{n}", 0},
+    {"ynn", "y_{n}", 0},
+    {"fxx", "f(x)", 10},
+    {"gxx", "g(x)", 10},
+    {"fnn", "f_{n}", 10},
+    {"fnx", "f_{n}(x)", 10},
+    {"cfn", "(f_{n})", 10},
+    {"zxf", "f(x_{0})", 10}, -- not consistent but rolls off the hand easier
+    {"fyy", "f(y)", 10},
+
+    -- open balls
+    {"BX", "B_{X}", 10},
+    {"BY", "B_{Y}", 10},
+
+    -- Vectors
+    {"vvc", "\\vec{v}", 10},
+    {"0vc", "\\vec{0}", 10},
 }
 
 local manual_snips = {
-    -- Right arrow modify
-    s(
-	{trig="\\to>", dscr="rightarrow with text under/above"},
-	fmta("\\prightarrow{<>}", { i(1)}),
-	{condition = in_mathzone}
-    ),
-
-    -- Subgroup
-    postfix("sg", {
-	f(function(_, parent)
-	    return parent.snippet.env.POSTFIX_MATCH:sub(1, -2) .. "$" .. parent.snippet.env.POSTFIX_MATCH:sub(-1) .. "$-subgroup"
-	end, {}),
-    },
-    { condition = not in_mathzone }
-    ),
-
     inner_snip("\\sinp", "\\sin(<>)","", in_mathzone),
     inner_snip("\\cosp", "\\cos(<>)","", in_mathzone),
     inner_snip("\\tanp", "\\tan(<>)","", in_mathzone),
@@ -129,21 +140,13 @@ local manual_snips = {
     -- Phrases
     object("F-module", "$F$-module", ""),
     object("R-module", "$R$-module", ""),
-
-    -- Topology
-    object("topo", "\\mathcal{T}", "Topology", in_mathzone),
-    object("xtopo", "(X, \\mathcal{T})", "Topological Space", in_mathzone, 5),
-    object("ytopo", "(Y, \\mathcal{U})", "Topological Space", in_mathzone, 5),
-    object("xdmet", "(X, d)", "Metric Space", in_mathzone),
-
-
 }
 
 local autosnips = {}
 
 for _, snip in ipairs(objects) do
     table.insert(
-	autosnips, object(snip[1], snip[2], "", in_mathzone)
+	autosnips, object(snip[1], snip[2], "", in_mathzone, snip[3])
     )
 end
 

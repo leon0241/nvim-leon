@@ -10,6 +10,7 @@ local create_alpha = funcs.create_alpha
 
 local autosnippets = {}
 
+-- Greek letters with a command, and whether to insert an uppercase variant of the snippet
 local greek_letters = {
     a = {command = "alpha", upper = false},
     b = {command = "beta", upper = false},
