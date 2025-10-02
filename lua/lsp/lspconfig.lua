@@ -9,7 +9,7 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -57,7 +57,7 @@ require('conform').setup {
     -- Conform will run multiple formatters sequentially
     python = { 'isort', 'black' },
     -- You can customize some of the format options for the filetype (:help conform.format)
-    rust = { 'rustfmt', lsp_format = 'fallback' },
+    rust = { '', lsp_format = 'fallback' },
     -- Conform will run the first available formatter
     javascript = { 'prettierd', 'prettier', stop_after_first = true },
   },

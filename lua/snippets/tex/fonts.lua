@@ -24,7 +24,7 @@ local var_postfixer = funcs.var_postfixer
 local postfix = require('luasnip.extras.postfix').postfix
 
 local autosnippets = {}
-local mathbb_letters = {"R", "N", "Q", "Z", "C", "E", "P", "1"}
+local mathbb_letters = {"R", "N", "Q", "Z", "C", "E", "P", "1", "S"}
 
 -- Inserts all regular mathBBs into a table
 for _, letter in ipairs(mathbb_letters) do
@@ -64,6 +64,10 @@ local manual_snippet_list = {
 
     mbb_super_sub("Z", "+", "^"),
     mbb_super_sub("Z", "-", "^"),
+
+    mbb_super_sub("S", "1", "^"),
+    mbb_super_sub("S", "2", "^"),
+    mbb_super_sub("S", "n", "^"),
 
     mbb_super_sub("N", "0", "_"),
     general_super_sub("\\ell", "1", "_"),

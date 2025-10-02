@@ -35,6 +35,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Down one screen and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Up one screen and center' })
 
 
+vim.keymap.set('n', '<Leader>u', "<Cmd> earlier 2s<CR>", { desc = 'Go back 2 seconds'})
 
 vim.keymap.set('n', '<C-w><C-l>', '<C-w>v<C-w>l', { desc = 'Split to the right' })
 vim.keymap.set('n', '<C-w><C-h>', '<C-w>v', { desc = 'Split to the left' })

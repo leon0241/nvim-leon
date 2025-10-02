@@ -84,15 +84,16 @@ local manual_snippet_list = {
     s(
 	{trig="//", dscr="Fraction", wordTrig=false},
 	fmta(
-	    "\\frac{<>}{<>}",
+	    "\\frac{ <> }{ <> }",
 	    {i(1), i(2)}
 	),
 	{ condition = in_mathzone}
     ),
     s(
-	{trig="([\\%{%}%(%)%w]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
+	{trig="([\\%w(\\%w%(.-%))(%_%{%d%})]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
+	-- {trig="([%_%{%d%}]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
 	fmta(
-	    "\\frac{<>}{<>}",
+	    "\\frac{ <> }{ <> }",
 	    {
 		f( function(_, snip) return snip.captures[1] end ),
 		i(1)

@@ -181,18 +181,6 @@ return {
 	)
     ),
     s(
-	{trig="add;itemt", dscr="add an itemized list with no spacing"},
-	fmta(
-	-- \renewcommand\labelitemi{\tiny$\bullet$}
-	    [[
-	\begin{itemize-tight}
-	    \item <>
-	\end{itemize-tight}
-	]],
-	    {i(1)}
-	)
-    ),
-    s(
 	{trig="add;itemz", dscr="add an itemized list"},
 	fmta(
 	    [[
@@ -210,17 +198,6 @@ return {
 	\begin{enumerate}
 	    \item <>
 	\end{enumerate}
-	]],
-	    {i(1)}
-	)
-    ),
-    s(
-	{trig="add;enumt", dscr="Add an enumerated list with no spacing"},
-	fmta(
-	    [[
-	\begin{enumerate-tight}
-	    \item <>
-	\end{enumerate-tight}
 	]],
 	    {i(1)}
 	)
@@ -248,12 +225,12 @@ return {
 	)
     ),
     s(
-	{trig="add;enumat", dscr="Add an enumerated list left aligned"},
+	{trig="add;enuma", dscr="Add an enumerated list left aligned"},
 	fmta(
 	    [[
-	\begin{enumerate-a-tight}
+	\begin{enumerate-a}
 	    \item <>
-	\end{enumerate-a-tight}
+	\end{enumerate-a}
 	]],
 	    {i(1)}
 	)

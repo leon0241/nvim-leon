@@ -1,6 +1,7 @@
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
+local rep = require("luasnip.extras").rep
 local fmta = require('luasnip.extras.fmt').fmta
 
 
@@ -115,48 +116,12 @@ return {}, {
 		),
 		{condition = in_mathzone}
 	),
-
 	s(
-		{trig="//", dscr="Fraction", wordTrig=false},
+		{trig = "onvar", dscr="Submodule Generator"},
 		fmta(
-			"\\frac{<>}{<>}",
-			{i(1), i(2)}
+			"<>_{1}<>\\dots<><>_{n}",
+			{ i(1), i(2),rep(2), rep(1)}
 		),
-		{ condition = in_mathzone}
-	),
-	s(
-		{trig="([[\\%w][%{.*%}][%(.*%)][%w]]+)%/", dscr="Auto expand first fraction", wordTrig=false, regTrig=true},
-		fmta(
-			"\\frac{<>}{<>}",
-			{
-				f( function(_, snip) return snip.captures[1] end ),
-				i(1)
-			}
-		),
-		{ condition = in_mathzone}
-	),
-
-
-	s(
-		{trig="(%_%{%d*)%}(%d)", regTrig=true, wordTrig=false, priority=10, dscr="auto-indent variables"},
-		fmta(
-			"<><>}",
-			{
-				f( function(_, snip) return snip.captures[1] end),
-				f( function(_, snip) return snip.captures[2] end),
-			}
-		),
-		{ condition = in_mathzone}
-	),
-	s(
-		{trig="([%a%)%]%}])(%d)", regTrig=true, wordTrig=false, priority=-1, dscr="auto-indent variables 2"},
-		fmta(
-			"<>_{<>}",
-			{
-				f( function(_, snip) return snip.captures[1] end),
-				f( function(_, snip) return snip.captures[2] end),
-			}
-		),
-		{ condition = in_mathzone}
+		{condition = in_mathzone}
 	),
 }

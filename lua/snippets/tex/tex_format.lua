@@ -58,7 +58,7 @@ return {
     -- Reference
     -- inner_snip("ref", "\\ref{<>}", "References"),
     s(
-	{trig="ref", dscr="Add a reference", wordTrig=true},
+	{trig="rref", dscr="Add a reference", wordTrig=true},
 	fmta("\\ref{<>}", { i(1) }),
 	{ condition = in_text}
     ),

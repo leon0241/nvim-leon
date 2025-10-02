@@ -7,6 +7,7 @@ require("luasnip.loaders.from_lua").load({
 })
 
 ls.setup({
+  updateevents = "TextChanged,TextChangedI",
   enable_autosnippets = true,
   store_selection_keys = "<Tab>",
   ext_opts = {
