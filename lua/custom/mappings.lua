@@ -77,10 +77,10 @@ vim.keymap.set('n', '<Leader>ft', "<Cmd> Format<CR>")
 --'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 -- nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 vim.keymap.set(
-  'i',
-  '<C-f>',
-  "<Esc><cmd> exec '.!inkscape-figures create \"'.getline('.').'\" \"'.b:vimtex.root.'/figures/\"'<CR><CR>:w<CR>'",
-  { noremap = true }
+    'i',
+    '<C-f>',
+    "<Esc><cmd> exec '.!inkscape-figures create \"'.getline('.').'\" \"'.b:vimtex.root.'/figures/\"'<CR><CR>:w<CR>'",
+    { noremap = true }
 )
 
 -- vim.keymap.set('n', '<leader>n', '<cmd> lua require("nabla").popup()<CR>', { desc = 'nabla' })
@@ -95,11 +95,11 @@ vim.keymap.set('n', '<Leader>zf', '<Cmd> Telescope bibtex<CR>', { desc = 'Find Z
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+    })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 -- Lazy
@@ -138,7 +138,7 @@ vim.keymap.set('n', '<F2>', function() dap.step_over() end, { desc = 'Debug: Ste
 vim.keymap.set('n', '<F3>', function() dap.step_out() end, { desc = 'Debug: Step Out' })
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
 vim.keymap.set('n', '<leader>B', function()
-  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+    dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
 end, { desc = 'Debug: Set Breakpoint' })
 
 -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
@@ -149,3 +149,51 @@ vim.keymap.set('n', '<leader>dt', function() dapui.toggle() end, { desc = 'Toggl
 -- Trouble
 vim.keymap.set('n', '<leader>xx', "<cmd>Trouble diagnostics toggle<cr>", { desc = 'Diagnostics (Trouble)' })
 vim.keymap.set('n', '<leader>xX', "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = 'Buffer Diagnostics (Trouble).' })
+
+-- LSP On Attach
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(event)
+        local nmap = function(keys, func, desc)
+            if desc then
+                desc = 'LSP: ' .. desc
+            end
+
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
+        end
+
+        nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+
+        -- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+        -- "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+        -- "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+        -- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+        -- "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
+        -- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
+
+        nmap('gd', function () Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
+        nmap('gr', function () Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
+        nmap('gI', function () Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
+        nmap('<leader>D', function () Snacks.picker.lsp_type_definitions() end, 'Type [D]efinition')
+        nmap('<leader>ds', function () Snacks.picker.lsp_symbols() end, '[D]ocument [S]ymbols')
+        nmap('<leader>ws', function () Snacks.picker.lsp_workspace_symbols() end, '[W]orkspace [S]ymbols')
+
+        -- See `:help K` for why this keymap
+        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<C-S-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+        -- Lesser used LSP functionality
+        nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+        nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+        nmap('<leader>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, '[W]orkspace [L]ist Folders')
+
+        -- -- Create a command `:Format` local to the LSP buffer
+        -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+        --   vim.lsp.buf.format()
+        -- end, { desc = 'Format current buffer with LSP' })
+    end,
+})

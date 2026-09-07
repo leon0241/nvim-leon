@@ -2,6 +2,8 @@
 -- See `:help vim.o`
 --
 
+vim.cmd.colorscheme "catppuccin-mocha"
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -18,6 +20,9 @@ vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Conform as formatexpr for = key
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- Save undo history
 vim.o.undofile = true
@@ -72,6 +77,7 @@ vim.diagnostic.config({
   severity_sort = false,
 })
 
+vim.g.vimtex_view_method = 'zathura'
 
 
 -- [[ Highlight on yank ]]
