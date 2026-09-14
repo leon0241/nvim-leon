@@ -2,7 +2,10 @@
 -- See `:help vim.o`
 --
 
-vim.cmd.colorscheme "catppuccin-mocha"
+-- UI overhaul!
+require('vim._core.ui2').enable {}
+
+vim.cmd.colorscheme 'catppuccin-mocha'
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -44,9 +47,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
@@ -54,8 +56,8 @@ vim.opt.shiftwidth = 4
 vim.opt.conceallevel = 1
 
 -- Folding. Related: UFO settings in plugin-config
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldcolumn = '0'
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -69,16 +71,15 @@ vim.opt.linebreak = true
 
 vim.opt.scrolloff = 7
 
-vim.diagnostic.config({
+vim.diagnostic.config {
   virtual_text = false,
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = false,
-})
+}
 
 vim.g.vimtex_view_method = 'zathura'
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -91,13 +92,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
 vim.o.updatetime = 250
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-  callback = function ()
-    vim.diagnostic.open_float(nil, {focus=false})
-  end
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  group = vim.api.nvim_create_augroup('float_diagnostic', { clear = true }),
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
 })

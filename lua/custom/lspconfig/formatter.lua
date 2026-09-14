@@ -1,27 +1,27 @@
-require('mason-conform').setup()
+-- require('mason-conform').setup()
 
-require('conform').setup {
-    formatters_by_ft = {
-        lua = { 'stylua' },
+-- require('conform').setup {
+--     formatters_by_ft = {
+--         lua = { 'stylua' },
+--
+--         tex = { 'latexindent' },
+--         -- Conform will run multiple formatters sequentially
+--         python = { 'isort', 'black' },
+--         -- You can customize some of the format options for the filetype (:help conform.format)
+--         rust = { '', lsp_format = 'fallback' },
+--         -- Conform will run the first available formatter
+--         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+--     },
+--     format_on_save = {
+--       -- These options will be passed to conform.format()
+--       timeout_ms = 500,
+--       lsp_format = 'fallback',
+--     },
+-- }
 
-        tex = { 'latexindent' },
-        -- Conform will run multiple formatters sequentially
-        python = { 'isort', 'black' },
-        -- You can customize some of the format options for the filetype (:help conform.format)
-        rust = { '', lsp_format = 'fallback' },
-        -- Conform will run the first available formatter
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
-    },
-    format_on_save = {
-      -- These options will be passed to conform.format()
-      timeout_ms = 500,
-      lsp_format = 'fallback',
-    },
-}
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*',
   callback = function(args)
-    require("conform").format({ bufnr = args.buf })
+    require('conform').format { bufnr = args.buf }
   end,
 })
