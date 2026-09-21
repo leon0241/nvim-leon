@@ -79,7 +79,7 @@ vim.diagnostic.config {
   severity_sort = false,
 }
 
-vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_view_method = 'zathura_simple'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
