@@ -2,6 +2,11 @@
 -- See `:help vim.o`
 --
 
+-- UI overhaul!
+require('vim._core.ui2').enable {}
+
+vim.cmd.colorscheme 'catppuccin-mocha'
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -18,6 +23,9 @@ vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
+
+-- Conform as formatexpr for = key
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- Save undo history
 vim.o.undofile = true
@@ -39,9 +47,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
@@ -49,12 +56,23 @@ vim.opt.shiftwidth = 4
 vim.opt.conceallevel = 1
 
 -- Folding. Related: UFO settings in plugin-config
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldcolumn = '0'
-vim.opt.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldcolumn = '1'
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Prefer LSP folding if client supports it
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client:supports_method 'textDocument/foldingRange' then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+  end,
+})
+
+vim.opt.fillchars = { fold = ' ', foldopen = '▾', foldclose = '▸', foldinner = ' ', foldsep = ' ' }
 
 -- changes the directory with each file open
 vim.opt.autochdir = false
@@ -64,15 +82,15 @@ vim.opt.linebreak = true
 
 vim.opt.scrolloff = 7
 
-vim.diagnostic.config({
+vim.diagnostic.config {
   virtual_text = false,
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = false,
-})
+}
 
-
+vim.g.vimtex_view_method = 'zathura_simple'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -85,13 +103,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
 vim.o.updatetime = 250
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-  callback = function ()
-    vim.diagnostic.open_float(nil, {focus=false})
-  end
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  group = vim.api.nvim_create_augroup('float_diagnostic', { clear = true }),
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
 })

@@ -29,8 +29,8 @@ require('lazy').setup({
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
-      lazygit = {enabled = true},
-      notifier = { enabled = true },
+      lazygit = { enabled = true },
+      -- notifier = { enabled = true },
       picker = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
@@ -47,26 +47,28 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Vim Tmux integration
-  "christoomey/vim-tmux-navigator",
+  'christoomey/vim-tmux-navigator',
 
   -- VimTex
-  "lervag/vimtex",
+  'lervag/vimtex',
 
   -- Markdown Preview
   {
     -- install without yarn or npm
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
   },
 
   -- Zotero Integration
   {
-    "jalvesaq/zotcite",
+    'jalvesaq/zotcite',
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim",
+      'nvim-treesitter/nvim-treesitter',
+      -- 'nvim-telescope/telescope.nvim',
     },
   },
 
@@ -77,18 +79,12 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
 
-  "LudoPinelli/comment-box.nvim",
+  'LudoPinelli/comment-box.nvim',
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   'lewis6991/gitsigns.nvim',
 
   -- Lualine Status Line
   'nvim-lualine/lualine.nvim',
-
-  -- Dynamic Folding
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async' }
-  },
 
   {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -97,10 +93,10 @@ require('lazy').setup({
 
   -- Theme
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'catppuccin-mocha' end,
+    opts = { transparent_background = true },
   },
   -- ╭─────────────────────────────────────────────────────────╮
   -- │                       Formatting                        │
@@ -113,20 +109,20 @@ require('lazy').setup({
   {
     'folke/trouble.nvim',
     opts = {},
-    cmd = "Trouble",
+    cmd = 'Trouble',
   },
 
   -- Surround
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
   },
 
   -- Autopairs
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    event = 'InsertEnter',
   },
 
   -- Autocompletion
@@ -146,71 +142,88 @@ require('lazy').setup({
     },
   },
 
-
   -- ╭─────────────────────────────────────────────────────────╮
   -- │                Code and file Navigation                 │
   -- ╰─────────────────────────────────────────────────────────╯
 
   -- Marks
-  "chentoast/marks.nvim",
+  'chentoast/marks.nvim',
 
   -- Harpoon
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" }
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- Nvim tree
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
   },
 
-  -- Treesitter
+  -- Treesitter (RIP?)
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main', -- Ensure you are on main, NOT master
+    build = ':TSUpdate',
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- 'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-context',
     },
-    build = ':TSUpdate',
   },
 
-  -- Fuzzy Finder (files, lsp, etc)
-  {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    dependencies = {
-      'nvim-telescope/telescope-bibtex.nvim',
-      'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-    },
-  },
+  -- -- Fuzzy Finder (files, lsp, etc)
+  -- {
+  --   'nvim-telescope/telescope.nvim',
+  --   branch = '0.1.x',
+  --   dependencies = {
+  --     'nvim-telescope/telescope-bibtex.nvim',
+  --     'nvim-lua/plenary.nvim',
+  --     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+  --     -- Only load if `make` is available. Make sure you have the system
+  --     -- requirements installed.
+  --     {
+  --       'nvim-telescope/telescope-fzf-native.nvim',
+  --       build = 'make',
+  --       cond = function()
+  --         return vim.fn.executable 'make' == 1
+  --       end,
+  --     },
+  --   },
+  -- },
 
   -- ╭─────────────────────────────────────────────────────────╮
   -- │                    LSP Configuration                    │
   -- ╰─────────────────────────────────────────────────────────╯
 
   {
+    'oclay1st/gradle.nvim',
+    cmd = { 'Gradle', 'GradleExec', 'GradleInit', 'GradleFavorites' },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
+    opts = {
+      gradle_executable = './gradlew',
+    }, -- options, see default configuration
+    keys = {
+      { '<leader>G', desc = '+Gradle', mode = { 'n', 'v' } },
+      { '<leader>Gg', '<cmd>Gradle<cr>', desc = 'Gradle Projects' },
+      { '<leader>Gf', '<cmd>GradleFavorites<cr>', desc = 'Gradle Favorite Commands' },
+    },
+  },
+
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      -- 'williamboman/mason-lspconfig.nvim',
 
       -- DAP
       {
@@ -227,11 +240,10 @@ require('lazy').setup({
 
           -- Add your own debuggers here
           'leoluz/nvim-dap-go',
-          'mfussenegger/nvim-dap-python',
+          -- 'mfussenegger/nvim-dap-python',
         },
 
         config = function()
-
           local dap = require 'dap'
           local dapui = require 'dapui'
 
@@ -255,24 +267,24 @@ require('lazy').setup({
           dap.configurations.python = {
             {
               type = 'python',
-              request = 'launch';
-              name = "Launch file";
-              program = "${file}";
+              request = 'launch',
+              name = 'Launch file',
+              program = '${file}',
               pythonPath = function()
                 return 'python'
-              end;
+              end,
             },
             {
               type = 'python',
-              request = 'launch';
-              name = "Choco Opt";
-              program = "/mnt/data/Documents/git/ct-cw3/tools/choco_opt.py";
-              args = {"-p", "riscv", "/mnt/data/Documents/git/ct-cw3/tests/end-to-end/arithmetic-comparison-ops/and_no_side_effects.choc"};
-              console = "integratedTerminal";
+              request = 'launch',
+              name = 'Choco Opt',
+              program = '/mnt/data/Documents/git/ct-cw3/tools/choco_opt.py',
+              args = { '-p', 'riscv', '/mnt/data/Documents/git/ct-cw3/tests/end-to-end/arithmetic-comparison-ops/and_no_side_effects.choc' },
+              console = 'integratedTerminal',
               pythonPath = function()
                 return 'python'
-              end;
-            }
+              end,
+            },
           }
 
           -- Dap UI setup
@@ -297,28 +309,36 @@ require('lazy').setup({
             },
           }
 
-          dap.listeners.after.event_initialized.dapui_config = function() dapui.open() end
-          dap.listeners.before.launch.dapui_config = function() dapui.open() end
-          dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-          dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+          dap.listeners.after.event_initialized.dapui_config = function()
+            dapui.open()
+          end
+          dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+          end
+          dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+          end
+          dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+          end
 
           -- Install golang specific config
           require('dap-go').setup()
 
-          require('dap-python').setup("python")
-        end
+          -- require('dap-python').setup("python")
+        end,
       },
 
       -- Linting
       {
-        "mfussenegger/nvim-lint",
-        "rshkarin/mason-nvim-lint",
+        'mfussenegger/nvim-lint',
+        'rshkarin/mason-nvim-lint',
       },
 
       -- Formatting
       {
-        "stevearc/conform.nvim",
-        "zapling/mason-conform.nvim",
+        'stevearc/conform.nvim',
+        'zapling/mason-conform.nvim',
       },
 
       -- Useful status updates for LSP
