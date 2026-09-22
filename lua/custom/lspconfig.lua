@@ -7,22 +7,20 @@ vim.lsp.config('*', {
   root_markers = { '.git', '.hg' },
 })
 
-vim.lsp.enable({
+vim.lsp.enable {
   'ltex',
   'lua_ls',
   'basedpyright',
   'rust-analyzer',
-  'qmlls'
-})
+  'qmlls',
+}
 
+require 'custom.lspconfig.linter'
 
-require('custom.lspconfig.linter')
+require 'custom.lspconfig.formatter'
 
+require 'custom.lspconfig.folding'
 
-require('custom.lspconfig.formatter')
-
-
-require('custom.lspconfig.autocomplete')
-
+require 'custom.lspconfig.autocomplete'
 
 -- LSP On attach commands is configured in mappings.lua
