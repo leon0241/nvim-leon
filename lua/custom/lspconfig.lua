@@ -19,8 +19,6 @@ require 'custom.lspconfig.linter'
 
 require 'custom.lspconfig.formatter'
 
-require 'custom.lspconfig.folding'
-
 require 'custom.lspconfig.autocomplete'
 
 -- LSP On attach commands is configured in mappings.lua

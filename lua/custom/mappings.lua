@@ -73,9 +73,9 @@ n_mapper('<C-l>', '<cmd> TmuxNavigateRight<CR>', { desc = 'window right' })
 n_mapper('<C-j>', '<cmd> TmuxNavigateDown<CR>', { desc = 'window down' })
 n_mapper('<C-k>', '<cmd> TmuxNavigateUp<CR>', { desc = 'window up' })
 
--- UFO
-n_mapper('zR', require('ufo').openAllFolds)
-n_mapper('zM', require('ufo').closeAllFolds)
+-- -- UFO
+-- n_mapper('zR', require('ufo').openAllFolds)
+-- n_mapper('zM', require('ufo').closeAllFolds)
 n_mapper('<Leader>ft', '<Cmd> Format<CR>')
 
 -- inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>

@@ -86,12 +86,6 @@ require('lazy').setup({
   -- Lualine Status Line
   'nvim-lualine/lualine.nvim',
 
-  -- Dynamic Folding
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async' },
-  },
-
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite

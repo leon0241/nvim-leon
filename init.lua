@@ -7,21 +7,19 @@ vim.g.maplocalleader = ' '
 -- todo
 
 -- Install lazy package manager
-require("lazy-install")
+require 'lazy-install'
 
 -- Plugins
-require("lazy-plugins")
+require 'lazy-plugins'
 
 -- Neovim options
 require("custom.options")
 
 -- Plugin setups
-require("custom.plugin-config")
+require 'custom.plugin-config'
 
 -- Mappings
-require("custom.mappings")
-
-
+require 'custom.mappings'
 
 -- require("custom.init")
 
