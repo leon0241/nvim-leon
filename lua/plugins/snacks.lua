@@ -5,7 +5,12 @@ vim.pack.add({
 local Snacks = require("snacks")
 
 Snacks.setup({
-    picker = {enabled = "true"}
+    picker = {
+        enabled = "true",
+        files = {
+            ignored = true,
+        }
+    }
 })
 
 function nmap(maps)
@@ -17,4 +22,5 @@ end
 
 nmap({
     { "<leader>ff", function() Snacks.picker.files() end, {desc = "Find Files"} },
+    { "<leader>/", function() Snacks.picker.grep() end, {desc = "Grep"} },
 })
