@@ -4,6 +4,10 @@
       "rev": "81ed10ebe1144b0eb9a7f289ffae000c22772c20",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "packview.nvim": {
+      "rev": "1c98841a224c7245cd63a4f480887d0b63d9320e",
+      "src": "https://github.com/Roddyck/packview.nvim"
+    },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
