@@ -10,10 +10,12 @@ Snacks.setup({
         files = {
             ignored = true,
         }
-    }
+    },
+    lazygit = {enabled = "true"},
 })
 
 nmap({
     { "<leader>ff", function() Snacks.picker.files() end, {desc = "Find Files"} },
     { "<leader>/", function() Snacks.picker.grep() end, {desc = "Grep"} },
+    {"<Leader>lg", function() Snacks.lazygit.open() end, { desc = '[L]azy [G]it' }}
 })

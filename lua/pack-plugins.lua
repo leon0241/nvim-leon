@@ -6,5 +6,6 @@ vim.pack.add({
 
     "https://github.com/Roddyck/packview.nvim", -- Viewing Nvim pack plugins
     "https://github.com/catppuccin/nvim", -- Colour Scheme
-    'https://github.com/nvim-lualine/lualine.nvim' -- Status Line
+    'https://github.com/nvim-lualine/lualine.nvim', -- Status Line
+    "https://github.com/christoomey/vim-tmux-navigator" -- Nvim Tmux Integration
 })
