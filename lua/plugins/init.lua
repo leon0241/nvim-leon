@@ -1,2 +1,6 @@
-require('lua.plugins.mini')
-require('lua.plugins.snacks')
+require('plugins.mini')
+require('plugins.snacks')
+require('plugins.lualine')
+require('plugins.whichkey')
+require('plugins.vimtex')
+require('plugins.luasnip')

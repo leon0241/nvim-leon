@@ -4,10 +4,12 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require('lua/pack-plugins')
+require('pack-plugins')
 
-require('lua/mappings')
+require('mappings')
 
-require('lua/options')
+require('options')
 
-require('lua/plugins/init')
+require('plugins.init')
+
+require('lspconfig')

@@ -1,4 +1,10 @@
+-- One shot nvim pack plugins
+
 vim.pack.add({
-	-- 'https://github.com/nvim-mini/mini.nvim',
-    "https://github.com/Roddyck/packview.nvim"
+    -- Necessary for Nerdfonts
+    'https://github.com/nvim-tree/nvim-web-devicons',
+
+    "https://github.com/Roddyck/packview.nvim", -- Viewing Nvim pack plugins
+    "https://github.com/catppuccin/nvim", -- Colour Scheme
+    'https://github.com/nvim-lualine/lualine.nvim' -- Status Line
 })

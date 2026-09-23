@@ -1,3 +1,4 @@
 def test():
     for i in range(5):
-        x = 1
+        test = 1
+        x = "test"

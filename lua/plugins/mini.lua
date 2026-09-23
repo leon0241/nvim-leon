@@ -1,7 +1,8 @@
-vim.pack.add({
-	'https://github.com/nvim-mini/mini.nvim',
-})
+require('utils.map-helpers')
 
+vim.pack.add({'https://github.com/nvim-mini/mini.nvim',})
+
+-- Status Column
 
 local spec = {
     -- Prefer visible separator with a more efficient order to use
@@ -15,11 +16,18 @@ local spec = {
     { win = 'inactive', sep = ' ' },
 }
 
-vim.opt.number = true
 local StatusColumn = require("mini.statuscolumn")
 
 StatusColumn.setup({
     content = StatusColumn.gen_content.main(spec)
+})
+
+-- Mini Files
+local Files = require('mini.files')
+Files.setup()
+
+nmap({
+    { "<C-n>", function() Files.open() end, {desc = "Mini Files"} },
 })
 
 require('mini.pairs').setup()
