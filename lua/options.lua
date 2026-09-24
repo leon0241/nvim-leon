@@ -1,4 +1,12 @@
-require('vim._core.ui2').enable {}
+-- Command height to 0 for centered command line
+vim.o.cmdheight = 0
+
+require('vim._core.ui2').enable({
+    enable = true,
+    msg = {
+        targets = "msg"
+    }
+})
 
 -- Set colourscheme
 vim.cmd.colorscheme "catppuccin-mocha"
@@ -33,5 +41,7 @@ vim.opt.scrolloff = 7
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.foldcolumn = "1"
+
+vim.opt.laststatus = 3
 
 vim.wo.signcolumn= "yes"

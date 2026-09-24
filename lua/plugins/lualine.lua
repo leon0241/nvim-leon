@@ -1,3 +1,12 @@
+function isRecording ()
+    local reg = vim.fn.reg_recording()
+    if reg ~= "" then
+        return "Recording @" .. reg
+    else
+        return ""
+    end
+end 
+
 require('lualine').setup({
     options = {
         icons_enabled = true,
@@ -6,15 +15,18 @@ require('lualine').setup({
         section_separators = '',
     },
     sections = {
-        lualine_a = { { 'mode', separator = { left = ''}, right_padding = 2 } },
+        lualine_a = { { 'mode', right_padding = 2 } },
         lualine_b = { {'filename', separator = { right = '' }}},
         lualine_c = {
-            '%=', --[[ add your center components here in place of this comment ]]
+            isRecording, --[[ add your center components here in place of this comment ]]
         },
-        lualine_x = {},
-        lualine_y = { 'filetype', 'progress' },
+        -- lualine_d = {
+        --     '%=', --[[ add your center components here in place of this comment ]]
+        -- },
+        lualine_x = { "lsp_status" },
+        lualine_y = { {'filetype', separator = { left = ''}}, 'progress' },
         lualine_z = {
-            { 'location', separator = { right = '' }, left_padding = 2 },
+            { 'location', left_padding = 2 },
         },
     },
     inactive_sections = {
@@ -22,5 +34,4 @@ require('lualine').setup({
         lualine_x = {}, lualine_y = {}, lualine_z = { 'location' },
     },
     tabline = {},
-    extensions = { 'nvim-tree'},
 })

@@ -5,6 +5,8 @@ return {
 
     filetypes = { 'lua' },
 
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+
     -- Sets the workspace "root" to the directory where any of these files is found.
 
     -- Files sharing a root will reuse the LSP client/connection.

@@ -26,20 +26,6 @@ vim.lsp.enable('basedpyright')
 vim.lsp.enable('ltex-ls-plus')
 vim.lsp.enable('texlab')
 
--- Autocompletion
-vim.o.completeopt = "menu,menuone,noinsert,popup" -- Ensures the menu appears even for a single match and uses the native popup window.
-vim.bo.autocomplete = false -- Enables the overall completion feature (only in buffers).
-
-
--- On Buffer enter
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        vim.bo.autocomplete = vim.bo.buftype == '' -- Enables the overall completion feature (only in buffers).
-    end, 
-}) 
-
-
-
 -- On LSP Attach
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp_completion", { clear = true }),
@@ -50,16 +36,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             return
         end
 
-        -- Native Autocompletion
         local client = vim.lsp.get_client_by_id(client_id)
-        if client and client:supports_method("textDocument/completion") then
-            -- Enable native LSP completion for this client + buffer
-            vim.lsp.completion.enable(true, client_id, args.buf, {
-                autotrigger = true,   -- auto-show menu as you type (recommended)
-                -- You can also set { autotrigger = false } and trigger manually with <C-x><C-o>
-            })
-        end
-
         -- Prefer LSP folding if client supports it
         if client:supports_method('textDocument/foldingRange') then
 
@@ -70,3 +47,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
     end,
 })
+
+-- Native Autocompletion
+-- if client and client:supports_method("textDocument/completion") then
+--     -- Enable native LSP completion for this client + buffer
+--     vim.lsp.completion.enable(true, client_id, args.buf, {
+    --         autotrigger = true,   -- auto-show menu as you type (recommended)
+    --         -- You can also set { autotrigger = false } and trigger manually with <C-x><C-o>
+    --     })
+    -- end
+

@@ -1,9 +1,6 @@
-vim.pack.add({"https://github.com/L3MON4D3/LuaSnip", "https://github.com/benlubas/cmp2lsp"})
-
-vim.pack.add({"https://github.com/saadparwaiz1/cmp_luasnip"})
-
-require('cmp2lsp').setup({
-    sources = {name = "cmp_luasnip"}
+vim.pack.add({
+    "https://github.com/L3MON4D3/LuaSnip",
+    "https://github.com/saadparwaiz1/cmp_luasnip"
 })
 
 local ls = require("luasnip")
@@ -34,5 +31,14 @@ ls.setup({
 })
 
 -- vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
-vim.keymap.set({"i", "s"}, "jl", function() ls.jump( 1) end, {silent = true})
-vim.keymap.set({"i", "s"}, "jp", function() ls.jump(-1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "jl", function()
+    if ls.expand_or_locally_jumpable() then
+        ls.expand_or_jump()
+    end
+end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "jp", function() 
+    if ls.locally_jumpable(-1) then
+        ls.jump(-1)
+    end
+end, {silent = true})
