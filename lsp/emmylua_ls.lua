@@ -13,14 +13,17 @@ return {
 
     -- Nested lists indicate equal priority, see |vim.lsp.Config|.
 
-    root_markers = { { '.emmyrc.json', '.luarc.json' }, '.git' },
+    root_markers = { '.emmyrc.json', '.luarc.json', '.git' },
 
     settings = {
-        Lua = {
+        emmylua = {
             runtime = { version = 'LuaJIT' },
             diagnostics = {
                 globals = { 'vim' },
             },
+            codeLens = { enable = false },
+            hint = { enable = true},
+
             workspace = {
                 checkThirdParty = false,
                 library = {

@@ -1,4 +1,4 @@
-def test():
-    for i in range(5):
-        test = 1
-        x = "test"
+def test(a: int) -> int:
+    return a
+    
+_ = test(2)

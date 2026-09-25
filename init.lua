@@ -13,3 +13,5 @@ require('options')
 require('plugins.init')
 
 require('lspconfig')
+
+require('dapconfig')
